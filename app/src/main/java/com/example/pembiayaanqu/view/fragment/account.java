@@ -31,23 +31,11 @@ public class account extends Fragment {
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
             for (UserInfo profile : user.getProviderData()) {
-
-                String providerId = profile.getProviderId();
-                String uid = profile.getUid();
-
-                String name = profile.getDisplayName();
-                TextView namaLengkap = (TextView)v.findViewById(R.id.namaLengkap);
-                namaLengkap.setText(name);
-                String email = profile.getEmail();
-                TextView Email = (TextView)v.findViewById(R.id.email);
-                Email.setText(email);
-                provider = user.getProviders().get(0);
-                String photo = checkResolutionPhoto(provider,photoUrl,user);
-                
                 ImageView photoview = (ImageView)v.findViewById(R.id.imageAccount);
-                if (photo.isEmpty()){
-                    Glide.with(this).load(R.mipmap.user).into(photoview);
-                }else{
+                if (profile.getPhotoUrl()!=null){
+                    provider = user.getProviders().get(0);
+                    photoUrl = user.getPhotoUrl().toString();
+                    String photo = checkResolutionPhoto(provider,photoUrl,user);
                     Glide.with(this).load(photo).fitCenter().into(photoview);
                 }
             }
@@ -57,19 +45,16 @@ public class account extends Fragment {
     
     private String checkResolutionPhoto(String provider,String photoUrl,FirebaseUser user){
         if (provider.equals("facebook.com")) {
-            photoUrl = user.getPhotoUrl() + "?height=500";
+            photoUrl = photoUrl + "?height=500";
         }
         else if(provider.equals("google.com"))
         {
-            photoUrl = user.getPhotoUrl().toString();
-
-            //Remove thumbnail url and replace the original part of the Url with the new part
             photoUrl = photoUrl.substring(0, photoUrl.length() - 15) + "s400-c/photo.jpg";
 
         }
         else
         {
-            photoUrl = user.getPhotoUrl().toString();
+            photoUrl=photoUrl;
         }
         return photoUrl;
     }

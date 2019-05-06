@@ -1,15 +1,31 @@
 package com.example.pembiayaanqu.view.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.pembiayaanqu.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class short_account extends Fragment {
+
+    private EditText namaLengkap;
+    private EditText nomorHP;
+    private EditText email;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore firebaseFirestore;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.account_short, container, false);
@@ -22,6 +38,46 @@ public class short_account extends Fragment {
             }
         });
 
+        namaLengkap = view.findViewById(R.id.namaLengkap);
+        nomorHP = view.findViewById(R.id.nomorHP);
+        email = view.findViewById(R.id.email);
+
+        mAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        final FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            firebaseFirestore.collection("Users").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()){
+                                namaLengkap.setText(documentSnapshot.getString("Nama Lengkap"));
+                                nomorHP.setText(documentSnapshot.getString("Nomor Handphone"));
+                                email.setText(documentSnapshot.getString("Email"));
+                            }else {
+                                namaLengkap.setText(user.getDisplayName());
+                                nomorHP.setText(user.getPhoneNumber());
+                                email.setText(user.getEmail());
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getContext(),"Failure",Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            namaLengkap.setEnabled(false);
+            nomorHP.setEnabled(false);
+            email.setEnabled(false);
+        }
         return view;
+    }
+
+    private void loadData(){
+
     }
 }

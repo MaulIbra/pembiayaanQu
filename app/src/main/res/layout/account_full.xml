@@ -37,6 +37,8 @@
             android:hint="@string/nama_lengkap"
             android:padding="8dp"
             android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/namaLengkapView"
             app:layout_constraintTop_toBottomOf="@+id/namaLengkapView" />
@@ -65,6 +67,8 @@
             android:hint="@string/nomor_handphone"
             android:padding="8dp"
             android:inputType="phone"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/noHandphoneView"
             app:layout_constraintTop_toBottomOf="@+id/noHandphoneView" />
@@ -92,6 +96,8 @@
             android:hint="@string/email"
             android:padding="8dp"
             android:inputType="textEmailAddress"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/emailView"
             app:layout_constraintTop_toBottomOf="@+id/emailView" />
@@ -118,7 +124,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/umur"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/umurView"
             app:layout_constraintTop_toBottomOf="@+id/umurView" />
@@ -143,9 +151,11 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/custom_edit_text"
-            android:hint="@string/umur"
+            android:hint="@string/status"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/statusView"
             app:layout_constraintTop_toBottomOf="@+id/statusView" />
@@ -172,7 +182,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/jenis_kelamin"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/jenisKelaminView"
             app:layout_constraintTop_toBottomOf="@+id/jenisKelaminView" />
@@ -200,7 +212,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/pendidikan_terakhir"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/pendidikanTerakhirView"
             app:layout_constraintTop_toBottomOf="@+id/pendidikanTerakhirView" />
@@ -227,7 +241,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/pekerjaan_usaha"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/pekerjaanUsahaView"
             app:layout_constraintTop_toBottomOf="@+id/pekerjaanUsahaView" />
@@ -254,7 +270,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/no_npwp"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/noNPWPView"
             app:layout_constraintTop_toBottomOf="@+id/noNPWPView" />
@@ -281,7 +299,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/no_ktp"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/noKTPView"
             app:layout_constraintTop_toBottomOf="@+id/noKTPView" />
@@ -308,7 +328,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/lama_bekerja_usaha"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/lamaBekerjaUsahaView"
             app:layout_constraintTop_toBottomOf="@+id/lamaBekerjaUsahaView" />
@@ -336,7 +358,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/nama_perusahaan_saat_bekerja_usaha"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/namaPerusahaanSaatBekerjaUsahaView"
             app:layout_constraintTop_toBottomOf="@+id/namaPerusahaanSaatBekerjaUsahaView" />
@@ -364,7 +388,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/jumlah_pengajuan_pembiayaan"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/jumlahPengajuanPembiayaanView"
             app:layout_constraintTop_toBottomOf="@+id/jumlahPengajuanPembiayaanView" />
@@ -391,7 +417,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/tipe_tujuan_pembiayaan"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tipeTujuanPembiayaanView"
             app:layout_constraintTop_toBottomOf="@+id/tipeTujuanPembiayaanView" />
@@ -418,7 +446,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/lokasi_pengambilan"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/lokasiPengambilanView"
             app:layout_constraintTop_toBottomOf="@+id/lokasiPengambilanView" />
@@ -446,7 +476,9 @@
             android:background="@drawable/custom_edit_text"
             android:hint="@string/alamat_lokasi"
             android:padding="8dp"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
+            android:textSize="13dp"
+            android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/alamatLokasiView"
             app:layout_constraintTop_toBottomOf="@+id/alamatLokasiView" />
@@ -490,6 +522,25 @@
             app:layout_constraintTop_toBottomOf="@id/attachJaminan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/layout_id_to_savedata" />
+
+        <Button
+            android:id="@+id/layout_id_to_savedata"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/attachJaminan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_id_to_shortAccount"
             app:layout_constraintStart_toEndOf="@+id/layout_id_to_editAccount" />
 
         <Button
@@ -507,7 +558,7 @@
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/attachJaminan"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/layout_id_to_shortAccount"
+            app:layout_constraintEnd_toStartOf="@id/layout_id_to_savedata"
             app:layout_constraintStart_toStartOf="parent" />
         
     </android.support.constraint.ConstraintLayout>

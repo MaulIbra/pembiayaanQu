@@ -19,11 +19,17 @@ import com.example.pembiayaanqu.MainActivity;
 import com.example.pembiayaanqu.R;
 import com.example.pembiayaanqu.model.user;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class register extends AppCompatActivity {
@@ -38,6 +44,7 @@ public class register extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     private RelativeLayout frameProgressbar;
     private ProgressBar progressBar;
+    private FirebaseFirestore Firestore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +71,7 @@ public class register extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         firebaseAuth = FirebaseAuth.getInstance();
+        Firestore = FirebaseFirestore.getInstance();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,14 +100,55 @@ public class register extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     hide_progressbar();
+
                                     user informationUser = new user(UserName,PhoneNumber,email,password);
+                                    user userDetail = new user(UserName,PhoneNumber,email,password,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null);
+
+                                    final Map<String, Object> userFirestore = new HashMap<>();
+                                    userFirestore.put("Nama Lengkap",userDetail.getUsername());
+                                    userFirestore.put("Nomor Handphone",userDetail.getPhoneNumber());
+                                    userFirestore.put("Email",userDetail.getEmail());
+                                    userFirestore.put("Umur",userDetail.getUmur());
+                                    userFirestore.put("Status",userDetail.getStatus());
+                                    userFirestore.put("Jenis Kelamin",userDetail.getJenis_kelamin());
+                                    userFirestore.put("Pendidikan Terakhir",userDetail.getPendidikan_terakhir());
+                                    userFirestore.put("Pekerjaan atau Usaha",userDetail.getPekerjaan_usaha());
+                                    userFirestore.put("Nomor NPWP",userDetail.getNomor_npwp());
+                                    userFirestore.put("Nomor KTP",userDetail.getNomor_ktp());
+                                    userFirestore.put("Lama bekerja atau Usaha",userDetail.getLama_bekerja_usaha());
+                                    userFirestore.put("Nama Perusahaan saat Bekerja",userDetail.getNama_perusahaan_saat_bekerja_usaha());
+                                    userFirestore.put("Jumlah Pengajuan Pembiayaan",userDetail.getJumlah_pengajuan_pembiayaan());
+                                    userFirestore.put("Tipe Tujuan Pembiayaan",userDetail.getTipe_tujuan_pembiayaan());
+                                    userFirestore.put("Lokasi Pengambilan",userDetail.getLokasi_pengambilan());
+                                    userFirestore.put("Alamat Lokasi",userDetail.getAlamat_lokasi());
+                                    userFirestore.put("uriPhotoKTP",userDetail.getUrlphotoKTP());
+                                    userFirestore.put("uriPhotoKK",userDetail.getUrlphotoKK());
+
+
+
                                     FirebaseDatabase.getInstance().getReference("Users")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                             .setValue(informationUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(register.this,"Registration Completed",Toast.LENGTH_LONG).show();
-                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                            Firestore.collection("Users").document(firebaseAuth.getCurrentUser().getUid())
+                                                    .set(userFirestore)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                                            Toast.makeText(register.this,"Registration Completed",Toast.LENGTH_LONG).show();
+                                                        }
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Toast.makeText(register.this,"Registration failure",Toast.LENGTH_LONG).show();
+                                                        }
+                                                    });
+
+
+
                                         }
                                     });
 
