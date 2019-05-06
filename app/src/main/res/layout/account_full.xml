@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/namaLengkapView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Nama Lengkap"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/namaLengkap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/nama_lengkap"
+            android:padding="8dp"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/namaLengkapView"
+            app:layout_constraintTop_toBottomOf="@+id/namaLengkapView" />
+
+
+        <TextView
+            android:id="@+id/noHandphoneView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nomor Handphone"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/namaLengkap"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/namaLengkap"
+            app:layout_constraintTop_toBottomOf="@+id/namaLengkap" />
+
+        <EditText
+            android:id="@+id/nomorHP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/nomor_handphone"
+            android:padding="8dp"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/noHandphoneView"
+            app:layout_constraintTop_toBottomOf="@+id/noHandphoneView" />
+
+        <TextView
+            android:id="@+id/emailView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Email"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/nomorHP"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/nomorHP"
+            app:layout_constraintTop_toBottomOf="@+id/nomorHP" />
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/email"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/emailView"
+            app:layout_constraintTop_toBottomOf="@+id/emailView" />
+
+        <TextView
+            android:id="@+id/umurView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Umur"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/email"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/email"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
+        <EditText
+            android:id="@+id/umur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/umur"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/umurView"
+            app:layout_constraintTop_toBottomOf="@+id/umurView" />
+
+        <TextView
+            android:id="@+id/statusView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Status"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/umur"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/umur"
+            app:layout_constraintTop_toBottomOf="@+id/umur" />
+
+        <EditText
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/umur"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/statusView"
+            app:layout_constraintTop_toBottomOf="@+id/statusView" />
+
+        <TextView
+            android:id="@+id/jenisKelaminView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Jenis Kelamin"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/email"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/status"
+            app:layout_constraintTop_toBottomOf="@+id/status" />
+
+        <EditText
+            android:id="@+id/jenis_kelamin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/jenis_kelamin"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/jenisKelaminView"
+            app:layout_constraintTop_toBottomOf="@+id/jenisKelaminView" />
+
+
+        <TextView
+            android:id="@+id/pendidikanTerakhirView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Pendidikan Terakhir"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/jenis_kelamin"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/jenis_kelamin"
+            app:layout_constraintTop_toBottomOf="@+id/jenis_kelamin" />
+
+        <EditText
+            android:id="@+id/pendidikanTerakhir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/pendidikan_terakhir"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pendidikanTerakhirView"
+            app:layout_constraintTop_toBottomOf="@+id/pendidikanTerakhirView" />
+
+        <TextView
+            android:id="@+id/pekerjaanUsahaView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Pekerjaan / Usaha"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/pendidikanTerakhir"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/pendidikanTerakhir"
+            app:layout_constraintTop_toBottomOf="@+id/pendidikanTerakhir" />
+
+        <EditText
+            android:id="@+id/pekerjaanUsaha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/pekerjaan_usaha"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pekerjaanUsahaView"
+            app:layout_constraintTop_toBottomOf="@+id/pekerjaanUsahaView" />
+
+        <TextView
+            android:id="@+id/noNPWPView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nomor NPWP"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/pekerjaanUsaha"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/pekerjaanUsaha"
+            app:layout_constraintTop_toBottomOf="@+id/pekerjaanUsaha" />
+
+        <EditText
+            android:id="@+id/noNPWP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/no_npwp"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/noNPWPView"
+            app:layout_constraintTop_toBottomOf="@+id/noNPWPView" />
+
+        <TextView
+            android:id="@+id/noKTPView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nomor KTP"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/noNPWP"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/noNPWP"
+            app:layout_constraintTop_toBottomOf="@+id/noNPWP" />
+
+        <EditText
+            android:id="@+id/noKTP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/no_ktp"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/noKTPView"
+            app:layout_constraintTop_toBottomOf="@+id/noKTPView" />
+
+        <TextView
+            android:id="@+id/lamaBekerjaUsahaView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Lama Bekerja / Usaha"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/noKTP"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/noKTP"
+            app:layout_constraintTop_toBottomOf="@+id/noKTP" />
+
+        <EditText
+            android:id="@+id/lamaBekerjaUsaha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/lama_bekerja_usaha"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/lamaBekerjaUsahaView"
+            app:layout_constraintTop_toBottomOf="@+id/lamaBekerjaUsahaView" />
+
+
+        <TextView
+            android:id="@+id/namaPerusahaanSaatBekerjaUsahaView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nama Perusahaan Saat Bekerja / Usaha"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/lamaBekerjaUsaha"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/lamaBekerjaUsaha"
+            app:layout_constraintTop_toBottomOf="@+id/lamaBekerjaUsaha" />
+
+        <EditText
+            android:id="@+id/namaPerusahaanSaatBekerjaUsaha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/nama_perusahaan_saat_bekerja_usaha"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/namaPerusahaanSaatBekerjaUsahaView"
+            app:layout_constraintTop_toBottomOf="@+id/namaPerusahaanSaatBekerjaUsahaView" />
+
+
+        <TextView
+            android:id="@+id/jumlahPengajuanPembiayaanView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Jumlah Pengajuan Pembiayaan"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/namaPerusahaanSaatBekerjaUsaha"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/namaPerusahaanSaatBekerjaUsaha"
+            app:layout_constraintTop_toBottomOf="@+id/namaPerusahaanSaatBekerjaUsaha" />
+
+        <EditText
+            android:id="@+id/jumlahPengajuanPembiayaan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/jumlah_pengajuan_pembiayaan"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/jumlahPengajuanPembiayaanView"
+            app:layout_constraintTop_toBottomOf="@+id/jumlahPengajuanPembiayaanView" />
+
+        <TextView
+            android:id="@+id/tipeTujuanPembiayaanView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tipe / Tujuan Pembiayaan"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/jumlahPengajuanPembiayaan"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/jumlahPengajuanPembiayaan"
+            app:layout_constraintTop_toBottomOf="@+id/jumlahPengajuanPembiayaan" />
+
+        <EditText
+            android:id="@+id/tipeTujuanPembiayaan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/tipe_tujuan_pembiayaan"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tipeTujuanPembiayaanView"
+            app:layout_constraintTop_toBottomOf="@+id/tipeTujuanPembiayaanView" />
+
+        <TextView
+            android:id="@+id/lokasiPengambilanView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Lokasi Pengambilan"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/tipeTujuanPembiayaan"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tipeTujuanPembiayaan"
+            app:layout_constraintTop_toBottomOf="@+id/tipeTujuanPembiayaan" />
+
+        <EditText
+            android:id="@+id/lokasiPengambilan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/lokasi_pengambilan"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/lokasiPengambilanView"
+            app:layout_constraintTop_toBottomOf="@+id/lokasiPengambilanView" />
+
+
+        <TextView
+            android:id="@+id/alamatLokasiView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Alamat Lokasi"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="@+id/lokasiPengambilan"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/lokasiPengambilan"
+            app:layout_constraintTop_toBottomOf="@+id/lokasiPengambilan" />
+
+        <EditText
+            android:id="@+id/alamatLokasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/custom_edit_text"
+            android:hint="@string/alamat_lokasi"
+            android:padding="8dp"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/alamatLokasiView"
+            app:layout_constraintTop_toBottomOf="@+id/alamatLokasiView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Dokumen Perlengkapan Jaminan"
+            app:layout_constraintStart_toStartOf="@+id/alamatLokasi"
+            app:layout_constraintTop_toBottomOf="@+id/alamatLokasi" />
+
+        <Button
+            android:id="@+id/attachJaminan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:padding="5dp"
+            android:text="Attach File"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintEnd_toEndOf="@+id/alamatLokasi"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="@+id/textView" />
+
+        <Button
+            android:id="@+id/layout_id_to_shortAccount"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button"
+            android:padding="10dp"
+            android:text="Short Profile"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/attachJaminan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/layout_id_to_editAccount" />
+
+        <Button
+            android:id="@+id/layout_id_to_editAccount"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/button_red"
+            android:padding="10dp"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/attachJaminan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_id_to_shortAccount"
+            app:layout_constraintStart_toStartOf="parent" />
+        
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">PembiayaanQu</string>
+    <string name="facebook_app_id">603826616798660</string>
+    <string name="fb_login_protocol_scheme">fb603826616798660</string>
+    <string name="email"><font size="13">Email</font></string>
+    <string name="password"><font size="13">Password</font></string>
+    <string name="phone_number"><font size="13">Phone Number</font></string>
+    <string name="username"><font size="13">Username</font></string>
+    <string name="home"><font size="13">Home</font></string>
+    <string name="account"><font size="13">Account</font></string>
+    <string name="information"><font size="13">Information</font></string>
+    <string name="login"><font size="13">Login</font></string>
+    <string name="logout"><font size="13">Logout</font></string>
+    <string name="tujuan_pengajuan"><font size="13">Tujuan Pengajuan</font></string>
+    <string name="nama_lengkap"><font size="13">Nama Lengkap</font></string>
+    <string name="nomor_handphone"><font size="13">Nomor Handphone</font></string>
+    <string name="umur"><font size="13">Umur</font></string>
+    <string name="status"><font size="13">status</font></string>
+    <string name="no_npwp"><font size="13">No NPWP</font></string>
+    <string name="pekerjaan_usaha"><font size="13">Pekerjaan / Usaha</font></string>
+    <string name="pendidikan_terakhir"><font size="13">Pendidikan Terakhir</font></string>
+    <string name="jenis_kelamin"><font size="13">Jenis Kelamin</font></string>
+    <string name="tipe_tujuan_pembiayaan"><font size="13">Tipe / Tujuan Pembiayaan</font></string>
+    <string name="jumlah_pengajuan_pembiayaan"><font size="13">Jumlah Pengajuan Pembiayaan</font></string>
+    <string name="nama_perusahaan_saat_bekerja_usaha"><font size="13">Nama Perusahaan Saat Bekerja / Usaha</font></string>
+    <string name="lama_bekerja_usaha"><font size="13">Lama Bekerja / Usaha</font></string>
+    <string name="no_ktp"><font size="13">No KTP</font></string>
+    <string name="lokasi_pengambilan"><font size="13">Lokasi Pengambilan</font></string>
+    <string name="alamat_lokasi"><font size="13">Alamat Lokasi</font></string>
+    <string name="waktu_kunjungan"><font size="13">Waktu Kunjungan</font></string>
+    <string name="title_activity_detail_menu">detail_menu</string>
+    <string name="enter_new_password"><font size="13">Enter New-Password</font></string>
+    <string name="title_activity_jemput_dokumen"><font size="13">jemput_dokumen</font></string>
+    <string name="deskripsi_transaski"><font size="13">Deskripsi Transaski</font></string>
+    <string name="tanggal"><font size="13">Tanggal</font></string>
+    <string name="nominal_transaksi"><font size="13">Nominal Transaksi</font></string>
+</resources>

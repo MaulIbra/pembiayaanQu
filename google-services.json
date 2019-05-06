@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "291954467858",
+    "firebase_url": "https://ready-pembiayaan-dev.firebaseio.com",
+    "project_id": "ready-pembiayaan-dev",
+    "storage_bucket": "ready-pembiayaan-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291954467858:android:92ab03be09a35dbf",
+        "android_client_info": {
+          "package_name": "com.example.pembiayaanqu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291954467858-2nvh3pn0d38uh118c42h932tslip820j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pembiayaanqu",
+            "certificate_hash": "98edb26b1b269f4b171cf40f9b98c37e128ac328"
+          }
+        },
+        {
+          "client_id": "291954467858-nmcr05ht5nspugq51dhcskhtr00hekar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeicO8azyaciBpQWtsREd2ytU8j3vNMrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291954467858-nmcr05ht5nspugq51dhcskhtr00hekar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
