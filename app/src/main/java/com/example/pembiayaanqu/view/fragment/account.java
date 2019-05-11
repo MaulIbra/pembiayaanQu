@@ -58,7 +58,7 @@ public class account extends Fragment {
                     provider = user.getProviders().get(0);
                     photoUrl = user.getPhotoUrl().toString();
                     String photo = checkResolutionPhoto(provider,photoUrl,user);
-                    Glide.with(this).load(photo).fitCenter().into(photoview);
+                    Glide.with(this).load(photo).into(photoview);
                     name.setText(user.getDisplayName());
                 }
             }
