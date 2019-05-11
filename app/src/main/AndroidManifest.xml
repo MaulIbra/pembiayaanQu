@@ -34,6 +34,7 @@
         <activity android:name=".view.activity.home"/>
         <activity android:name=".view.activity.register"/>
         <activity android:name=".view.activity.reset_password"/>
+        <activity android:name=".view.activity.edit_profile"/>
 
     </application>
 

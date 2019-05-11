@@ -64,6 +64,7 @@ public class registerPresenter implements registerMember.presenter {
                         if (task.isSuccessful()){
                             insertFirestore(collection,userFirestore);
                         }else{
+                            view.hideProgressBar();
                             view.displayToastFailure();
                         }
                     }
@@ -85,6 +86,7 @@ public class registerPresenter implements registerMember.presenter {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        view.hideProgressBar();
                         view.displayToastFailure();
                     }
                 });

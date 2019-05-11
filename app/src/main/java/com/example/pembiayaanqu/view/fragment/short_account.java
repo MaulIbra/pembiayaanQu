@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pembiayaanqu.R;
@@ -20,9 +20,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class short_account extends Fragment {
 
-    private EditText namaLengkap;
-    private EditText nomorHP;
-    private EditText email;
+    private TextView nomorHP;
+    private TextView email;
+    private TextView umur;
+    private TextView status;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
 
@@ -38,26 +39,27 @@ public class short_account extends Fragment {
             }
         });
 
-        namaLengkap = view.findViewById(R.id.namaLengkap);
         nomorHP = view.findViewById(R.id.nomorHP);
         email = view.findViewById(R.id.email);
+        umur = view.findViewById(R.id.umur);
+        status = view.findViewById(R.id.status);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            firebaseFirestore.collection("Users").document(user.getUid())
+            firebaseFirestore.collection("users").document(user.getUid())
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             if (documentSnapshot.exists()){
-                                namaLengkap.setText(documentSnapshot.getString("Nama Lengkap"));
                                 nomorHP.setText(documentSnapshot.getString("Nomor Handphone"));
                                 email.setText(documentSnapshot.getString("Email"));
+                                umur.setText(documentSnapshot.getString("Umur"));
+                                status.setText(documentSnapshot.getString("Status"));
                             }else {
-                                namaLengkap.setText(user.getDisplayName());
                                 nomorHP.setText(user.getPhoneNumber());
                                 email.setText(user.getEmail());
                             }
@@ -70,14 +72,7 @@ public class short_account extends Fragment {
                 }
             });
 
-            namaLengkap.setEnabled(false);
-            nomorHP.setEnabled(false);
-            email.setEnabled(false);
         }
         return view;
-    }
-
-    private void loadData(){
-
     }
 }

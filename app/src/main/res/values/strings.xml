@@ -34,4 +34,17 @@
     <string name="deskripsi_transaski"><font size="13">Deskripsi Transaski</font></string>
     <string name="tanggal"><font size="13">Tanggal</font></string>
     <string name="nominal_transaksi"><font size="13">Nominal Transaksi</font></string>
+    <string name="status_prompt"><font size="13">Pilih Status</font></string>
+    <string name="provinsi"><font size="13">Provinsi</font></string>
+    <string name="kecamatan"><font size="13">Kecamatan</font></string>
+    <string name="kodePos"><font size="13">Kode Pos</font></string>
+    <string name="masukkan_jalan_gedung_nomor_rt_rw"><font size="13">Masukkan Jalan,Gedung,Nomor,RT/RW</font></string>
+
+
+    <string-array name="Status">
+        <item>Kawin</item>
+        <item>Cerai</item>
+        <item>Belum Kawin</item>
+    </string-array>
+
 </resources>

@@ -4,119 +4,139 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/namaLengkapView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            android:text="Nama Lengkap"
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/namaLengkap"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/custom_edit_text"
-            android:textSize="13dp"
-            android:textColor="@color/textColor"
-            android:padding="8dp"
-            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/namaLengkapView"
-            app:layout_constraintTop_toBottomOf="@+id/namaLengkapView" />
+            app:layout_constraintStart_toStartOf="parent">
 
+            <TextView
+                android:id="@+id/noHandphoneView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:text="Nomor Handphone"
+                android:textSize="13dp"
+                android:textColor="@color/silver"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/noHandphoneView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Nomor Handphone"
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="@+id/namaLengkap"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/namaLengkap"
-            app:layout_constraintTop_toBottomOf="@+id/namaLengkap" />
+            <TextView
+                android:id="@+id/nomorHP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14dp"
+                android:fontFamily="@font/volte"
+                android:textColor="@color/textColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/noHandphoneView"
+                app:layout_constraintTop_toBottomOf="@+id/noHandphoneView" />
 
-        <EditText
-            android:id="@+id/nomorHP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/custom_edit_text"
-            android:padding="8dp"
-            android:inputType="phone"
-            android:textSize="13dp"
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/noHandphoneView"
-            app:layout_constraintTop_toBottomOf="@+id/noHandphoneView" />
+            <TextView
+                android:id="@+id/emailView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Email"
+                android:textColor="@color/silver"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="@+id/nomorHP"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/nomorHP"
+                app:layout_constraintTop_toBottomOf="@+id/nomorHP" />
 
-        <TextView
-            android:id="@+id/emailView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Email"
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="@+id/nomorHP"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/nomorHP"
-            app:layout_constraintTop_toBottomOf="@+id/nomorHP" />
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14dp"
+                android:fontFamily="@font/volte"
+                android:textColor="@color/textColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/emailView"
+                app:layout_constraintTop_toBottomOf="@+id/emailView" />
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/custom_edit_text"
-            android:padding="8dp"
-            android:inputType="textEmailAddress"
-            android:textSize="13dp"
-            android:textColor="@color/textColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/emailView"
-            app:layout_constraintTop_toBottomOf="@+id/emailView" />
+            <TextView
+                android:id="@+id/umurView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Umur"
+                android:textColor="@color/silver"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="@+id/email"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/email"
+                app:layout_constraintTop_toBottomOf="@+id/email" />
 
+            <TextView
+                android:id="@+id/umur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14dp"
+                android:fontFamily="@font/volte"
+                android:textColor="@color/textColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/umurView"
+                app:layout_constraintTop_toBottomOf="@+id/umurView" />
 
-        <Button
-            android:id="@+id/layout_id_to_fullAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/button"
-            android:padding="10dp"
-            android:text="Full Profile"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/email"
-            app:layout_constraintStart_toStartOf="@+id/email"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
+            <TextView
+                android:id="@+id/statusView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Status"
+                android:textColor="@color/silver"
+                android:textSize="13dp"
+                app:layout_constraintEnd_toEndOf="@+id/umur"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/umur"
+                app:layout_constraintTop_toBottomOf="@+id/umur" />
 
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:textSize="14dp"
+                android:fontFamily="@font/volte"
+                android:textColor="@color/textColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/statusView"
+                app:layout_constraintTop_toBottomOf="@+id/statusView" />
 
+            <Button
+                android:id="@+id/layout_id_to_fullAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button"
+                android:padding="10dp"
+                android:text="Full Profile"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/status"
+                app:layout_constraintStart_toStartOf="@+id/status"
+                app:layout_constraintTop_toBottomOf="@+id/status" />
+
+        </android.support.constraint.ConstraintLayout>
 </FrameLayout>
