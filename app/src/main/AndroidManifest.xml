@@ -17,11 +17,6 @@
 
 
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <activity android:name="com.facebook.FacebookActivity"
@@ -37,11 +32,32 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".view.activity.splashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.activity.home"/>
         <activity android:name=".view.activity.register"/>
         <activity android:name=".view.activity.reset_password"/>
         <activity android:name=".view.activity.edit_profile"/>
         <activity android:name=".view.activity.mapActivity"/>
+        <activity android:name=".view.activity.hasil_pencarian"/>
+        <activity android:name=".view.activity.notLogin"/>
+        <activity android:name=".view.activity.riwayat_pembiayaan"/>
+        <activity android:name=".view.activity.pengajuan_pembiayaan"/>
+        <activity android:name=".view.activity.bank"/>
+        <activity android:name=".view.activity.detail_menu"/>
+        <activity android:name=".view.activity.kalkulator_pembiayaan"/>
+        <activity android:name=".view.activity.program_csr"/>
+        <activity android:name=".view.activity.detail_menu_csr"/>
+        <activity android:name=".view.activity.gadai"/>
+        <activity android:name=".view.activity.koperasi"/>
+        <activity android:name=".view.activity.multifinance"/>
+        <activity android:name=".view.activity.catatan_keuangan"/>
+        <activity android:name=".view.activity.detailPengajuan"/>
     </application>
 
 </manifest>

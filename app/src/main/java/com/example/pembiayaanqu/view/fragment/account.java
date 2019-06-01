@@ -6,26 +6,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.pembiayaanqu.R;
 import com.example.pembiayaanqu.view.activity.edit_profile;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
-
-import java.util.zip.Inflater;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class account extends Fragment {
     private FirebaseAuth mAuth;
@@ -33,11 +31,12 @@ public class account extends Fragment {
     private String photoUrl;
     private String provider;
     private TextView name;
+    private FirebaseFirestore firebaseFirestore;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.account,container,false);
+        View v = inflater.inflate(R.layout.fragment_account,container,false);
 
         name = v.findViewById(R.id.gantiFoto);
         setting = v.findViewById(R.id.setting);
@@ -46,23 +45,47 @@ public class account extends Fragment {
             @Override
             public void onClick(View v) {
                 showPopup(v);
-
             }
         });
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        final ImageView photoview = v.findViewById(R.id.imageAccount);
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
-                ImageView photoview = (ImageView)v.findViewById(R.id.imageAccount);
-                if (profile.getPhotoUrl()!=null){
-                    provider = user.getProviders().get(0);
-                    photoUrl = user.getPhotoUrl().toString();
-                    String photo = checkResolutionPhoto(provider,photoUrl,user);
-                    Glide.with(this).load(photo).into(photoview);
-                    name.setText(user.getDisplayName());
-                }
+            firebaseFirestore.collection("users").document(user.getUid())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()){
+                                String photo = documentSnapshot.getString("uriPhotoProfile");
+                                if (photo== null){
+                                    photoview.setImageResource(R.mipmap.user);
+                                }else{
+                                    Glide.with(getActivity()).load(photo).fitCenter().into(photoview);
+                                }
+                                name.setText(documentSnapshot.getString("Nama Lengkap"));
+                            }else if(user.getPhotoUrl() != null){
+                                for (UserInfo profile : user.getProviderData()) {
+                                    provider = user.getProviders().get(0);
+                                    photoUrl = user.getPhotoUrl().toString();
+                                    String photo = checkResolutionPhoto(provider,photoUrl,user);
+                                    name.setText(profile.getDisplayName());
+                                    Glide.with(getActivity()).load(photo).fitCenter().into(photoview);
+                                }
+                            }else{
+                                name.setText(user.getDisplayName());
+                                photoview.setImageResource(R.mipmap.user);
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
             }
-        }
         return v;
     }
 
@@ -74,7 +97,8 @@ public class account extends Fragment {
            public boolean onMenuItemClick(MenuItem item) {
                switch (item.getItemId()){
                    case R.id.edit_profile:
-                       startActivity(new Intent(getContext(), edit_profile.class));
+                       Intent i = new Intent(getContext(), edit_profile.class);
+                       startActivity(i);
                }
                return true;
            }
@@ -97,4 +121,5 @@ public class account extends Fragment {
         }
         return photoUrl;
     }
+
 }

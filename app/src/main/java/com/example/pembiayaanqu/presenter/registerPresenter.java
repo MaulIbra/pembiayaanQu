@@ -34,7 +34,7 @@ public class registerPresenter implements registerMember.presenter {
 
         final String em = email;
         final String pass = Password;
-        user userDetail = new user(userName,phoneNumber,em,pass,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null);
+        user userDetail = new user(userName,phoneNumber,em,pass,null,null,null,null,null,null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null);
 
         final Map<String, Object> userFirestore = new HashMap<>();
         userFirestore.put("Nama Lengkap",userDetail.getUsername());
@@ -51,10 +51,17 @@ public class registerPresenter implements registerMember.presenter {
         userFirestore.put("Nama Perusahaan saat Bekerja",userDetail.getNama_perusahaan_saat_bekerja_usaha());
         userFirestore.put("Jumlah Pengajuan Pembiayaan",userDetail.getJumlah_pengajuan_pembiayaan());
         userFirestore.put("Tipe Tujuan Pembiayaan",userDetail.getTipe_tujuan_pembiayaan());
-        userFirestore.put("Lokasi Pengambilan",userDetail.getLokasi_pengambilan());
-        userFirestore.put("Alamat Lokasi",userDetail.getAlamat_lokasi());
+        userFirestore.put("Alamat Latitude",userDetail.getAlamatLatitude());
+        userFirestore.put("Alamat Longitude",userDetail.getAlamatLongitude());
+        userFirestore.put("Provinsi",userDetail.getProvinsi());
+        userFirestore.put("KotaKabupaten",userDetail.getKota_kabupaten());
+        userFirestore.put("Kecamatan",userDetail.getKecamatan());
+        userFirestore.put("Kode Pos",userDetail.getKodePos());
+        userFirestore.put("Alamat Lengkap",userDetail.getAlamatLengkap());
         userFirestore.put("uriPhotoKTP",userDetail.getUrlphotoKTP());
         userFirestore.put("uriPhotoKK",userDetail.getUrlphotoKK());
+        userFirestore.put("uriPhotoProfile",userDetail.getUrlphotoProfile());
+        userFirestore.put("uriPhotoJaminan",userDetail.getUrlphotoJaminan());
 
         view.showProgressBar();
         firebaseAuth.createUserWithEmailAndPassword(email,Password)

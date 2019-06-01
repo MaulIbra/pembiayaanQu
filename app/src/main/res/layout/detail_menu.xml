@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/pengajuan_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/pengajuan_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/pengajuan_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/pengajuan_toolbar" />
+
+    <TextView
+        android:id="@+id/nama_perusahaan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Mitra"
+        android:fontFamily="@font/volte"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/backArrow"
+        app:layout_constraintStart_toEndOf="@+id/backArrow"
+        app:layout_constraintTop_toTopOf="@+id/backArrow" />
+
+    <ImageView
+        android:id="@+id/pengajuan_pembiayaan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/pengajuan_pembiayaan2"
+        app:layout_constraintEnd_toStartOf="@+id/syarat"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pengajuan_toolbar" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Pengajuan Pembiayaan"
+        android:textColor="@color/colorText"
+        app:layout_constraintEnd_toEndOf="@+id/pengajuan_pembiayaan"
+        app:layout_constraintStart_toStartOf="@+id/pengajuan_pembiayaan"
+        app:layout_constraintTop_toBottomOf="@+id/pengajuan_pembiayaan" />
+
+    <ImageView
+        android:id="@+id/syarat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/syarat"
+        app:layout_constraintBottom_toBottomOf="@+id/pengajuan_pembiayaan"
+        app:layout_constraintEnd_toStartOf="@+id/kalkulator_pembiayaan"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/pengajuan_pembiayaan"
+        app:layout_constraintTop_toTopOf="@+id/pengajuan_pembiayaan" />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Informasi Pembiayaan"
+        android:textColor="@color/colorText"
+        app:layout_constraintEnd_toEndOf="@+id/syarat"
+        app:layout_constraintStart_toStartOf="@+id/syarat"
+        app:layout_constraintTop_toBottomOf="@+id/syarat" />
+
+    <ImageView
+        android:id="@+id/kalkulator_pembiayaan"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:src="@mipmap/hitunf_premi"
+        app:layout_constraintBottom_toBottomOf="@+id/syarat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/syarat"
+        app:layout_constraintTop_toTopOf="@+id/syarat" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Kalkulator Pembiayaan"
+        android:textColor="@color/colorText"
+        app:layout_constraintEnd_toEndOf="@+id/kalkulator_pembiayaan"
+        app:layout_constraintStart_toStartOf="@+id/kalkulator_pembiayaan"
+        app:layout_constraintTop_toBottomOf="@+id/kalkulator_pembiayaan" />
+
+
+</android.support.constraint.ConstraintLayout>

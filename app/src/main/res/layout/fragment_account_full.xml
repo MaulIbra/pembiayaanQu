@@ -371,11 +371,11 @@
             app:layout_constraintTop_toBottomOf="@+id/tipeTujuanPembiayaanView" />
 
         <TextView
-            android:id="@+id/lokasiPengambilanView"
+            android:id="@+id/provinsiView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Koordinat Lokasi"
+            android:text="Provinsi"
             android:textColor="@color/silver"
             android:textSize="13dp"
             app:layout_constraintEnd_toEndOf="@+id/tipeTujuanPembiayaan"
@@ -384,7 +384,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tipeTujuanPembiayaan" />
 
         <TextView
-            android:id="@+id/lokasiPengambilan"
+            android:id="@+id/provinsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -394,25 +394,23 @@
             android:fontFamily="@font/volte"
             android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/lokasiPengambilanView"
-            app:layout_constraintTop_toBottomOf="@+id/lokasiPengambilanView" />
-
-
+            app:layout_constraintStart_toStartOf="@+id/provinsiView"
+            app:layout_constraintTop_toBottomOf="@+id/provinsiView" />
         <TextView
-            android:id="@+id/alamatLokasiView"
+            android:id="@+id/kota_kabupatenView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Alamat Lokasi"
+            android:text="Kota / Kabupaten"
             android:textColor="@color/silver"
             android:textSize="13dp"
-            app:layout_constraintEnd_toEndOf="@+id/lokasiPengambilan"
+            app:layout_constraintEnd_toEndOf="@+id/provinsi"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/lokasiPengambilan"
-            app:layout_constraintTop_toBottomOf="@+id/lokasiPengambilan" />
+            app:layout_constraintStart_toStartOf="@+id/provinsi"
+            app:layout_constraintTop_toBottomOf="@+id/provinsi" />
 
         <TextView
-            android:id="@+id/alamatLokasi"
+            android:id="@+id/kota_kabupaten"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -422,20 +420,65 @@
             android:fontFamily="@font/volte"
             android:textColor="@color/textColor"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/alamatLokasiView"
-            app:layout_constraintTop_toBottomOf="@+id/alamatLokasiView" />
+            app:layout_constraintStart_toStartOf="@+id/kota_kabupatenView"
+            app:layout_constraintTop_toBottomOf="@+id/kota_kabupatenView" />
+
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/kecamatanView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Dokumen Perlengkapan Jaminan"
+            android:text="Kecamatan"
             android:textColor="@color/silver"
             android:textSize="13dp"
-            app:layout_constraintBottom_toTopOf="@id/imageKTP"
-            app:layout_constraintStart_toStartOf="@+id/alamatLokasi"
-            app:layout_constraintTop_toBottomOf="@+id/alamatLokasi" />
+            app:layout_constraintEnd_toEndOf="@+id/kota_kabupaten"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/kota_kabupaten"
+            app:layout_constraintTop_toBottomOf="@+id/kota_kabupaten" />
+
+        <TextView
+            android:id="@+id/kecamatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="14dp"
+            android:fontFamily="@font/volte"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/kecamatanView"
+            app:layout_constraintTop_toBottomOf="@+id/kecamatanView" />
+
+
+        <TextView
+            android:id="@+id/alamatLengkapView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Alamat Lengkap"
+            android:textColor="@color/silver"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="@+id/kecamatan"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/kecamatan"
+            app:layout_constraintTop_toBottomOf="@+id/kecamatan" />
+
+        <TextView
+            android:id="@+id/alamatLengkap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:textSize="14dp"
+            android:fontFamily="@font/volte"
+            android:textColor="@color/textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/alamatLengkapView"
+            app:layout_constraintTop_toBottomOf="@+id/alamatLengkapView" />
+
 
         <ImageView
             android:id="@+id/imageKTP"
@@ -448,7 +491,7 @@
             app:layout_constraintEnd_toStartOf="@id/imageKK"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/alamatLengkap" />
 
         <ImageView
             android:id="@+id/imageKK"
@@ -475,7 +518,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView" />
+            app:layout_constraintTop_toBottomOf="@id/imageKK" />
 
     </android.support.constraint.ConstraintLayout>
 

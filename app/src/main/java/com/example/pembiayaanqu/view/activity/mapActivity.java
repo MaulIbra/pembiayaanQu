@@ -68,6 +68,23 @@ public class mapActivity extends AppCompatActivity implements OnMapReadyCallback
         Places.initialize(mapActivity.this,"AIzaSyCeicO8azyaciBpQWtsREd2ytU8j3vNMrU");
         placesClient = Places.createClient(this);
         AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
+
+        btnFind = findViewById(R.id.setLocation);
+        btnFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(mapActivity.this,"infisdsjf",Toast.LENGTH_SHORT).show();
+                LatLng curent = mMap.getCameraPosition().target;
+                Double lat = curent.latitude;
+                Double lng = curent.longitude;
+                Intent mapLatLng = new Intent(mapActivity.this,edit_profile.class);
+                mapLatLng.putExtra("latitude",lat);
+                mapLatLng.putExtra("longitude",lng);
+                setResult(RESULT_OK,mapLatLng);
+                finish();
+            }
+        });
+
     }
 
     @SuppressLint("MissingPermission")

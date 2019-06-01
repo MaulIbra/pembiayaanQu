@@ -29,9 +29,9 @@ public class short_account extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.account_short, container, false);
+        View view =  inflater.inflate(R.layout.fragment_account_short, container, false);
 
-        Button toFullAccount = (Button) view.findViewById(R.id.layout_id_to_fullAccount);
+        Button toFullAccount = view.findViewById(R.id.layout_id_to_fullAccount);
         toFullAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,9 +45,10 @@ public class short_account extends Fragment {
         status = view.findViewById(R.id.status);
 
         mAuth = FirebaseAuth.getInstance();
+        final FirebaseUser user = mAuth.getCurrentUser();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        final FirebaseUser user = mAuth.getCurrentUser();
+
         if (user != null) {
             firebaseFirestore.collection("users").document(user.getUid())
                     .get()

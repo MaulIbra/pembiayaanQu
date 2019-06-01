@@ -63,7 +63,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <Button
+                android:id="@+id/uploadProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:fontFamily="@font/volte"
+                android:textAllCaps="false"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/imageAccount"
+                app:layout_constraintEnd_toEndOf="@id/imageAccount"
+                app:layout_constraintStart_toStartOf="@id/imageAccount"/>
+
             <ImageView
+                android:id="@+id/take_Picture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
@@ -84,7 +101,8 @@
                 android:text="Nama Lengkap"
                 android:textColor="@color/silver"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageAccount" />
+                app:layout_constraintTop_toBottomOf="@id/uploadProfile"
+                android:layout_marginLeft="16dp" />
 
             <EditText
                 android:id="@+id/namaLengkap"
@@ -537,32 +555,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lokasiPengambilanView" />
 
-            <EditText
+            <TextView
                 android:id="@+id/latitude"
-                android:layout_width="125dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/custom_edit_text"
-                android:clickable="false"
                 android:padding="8dp"
                 android:textSize="13dp"
                 android:textColor="@color/textColor"
-                android:inputType="text"
                 android:fontFamily="@font/volte"
                 app:layout_constraintEnd_toStartOf="@id/longitude"
                 app:layout_constraintStart_toStartOf="@+id/addcoordinatemaps"
                 app:layout_constraintTop_toBottomOf="@+id/addcoordinatemaps" />
 
-            <EditText
+            <TextView
                 android:id="@+id/longitude"
-                android:layout_width="125dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/custom_edit_text"
                 android:clickable="false"
                 android:padding="8dp"
                 android:textSize="13dp"
                 android:textColor="@color/textColor"
-                android:inputType="text"
                 android:fontFamily="@font/volte"
                 app:layout_constraintEnd_toEndOf="@+id/addcoordinatemaps"
                 app:layout_constraintStart_toEndOf="@id/latitude"
@@ -605,7 +620,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/pembatas" />
 
 
-            <EditText
+            <Spinner
                 android:id="@+id/provinsi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -613,7 +628,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/custom_edit_text"
-                android:hint="@string/provinsi"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="13dp"
@@ -636,7 +650,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/provinsi" />
 
 
-            <EditText
+            <Spinner
                 android:id="@+id/kota_kabupaten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -644,10 +658,8 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/custom_edit_text"
-                android:hint="Kota / Kabupaten"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="13dp"
                 android:textColor="@color/textColor"
                 android:inputType="text"
                 android:fontFamily="@font/volte"
@@ -759,6 +771,34 @@
                 app:layout_constraintStart_toStartOf="@+id/alamatLengkap"
                 app:layout_constraintTop_toBottomOf="@+id/alamatLengkap" />
 
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/imageKTP"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@id/fotoKTPView"
+                app:layout_constraintEnd_toEndOf="@id/fotoKTPView"
+                app:layout_constraintTop_toBottomOf="@id/fotoKTPView"/>
+
+            <Button
+                android:id="@+id/uploadPhotoKtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:fontFamily="@font/volte"
+                android:textAllCaps="false"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/imageKTP"
+                app:layout_constraintEnd_toEndOf="@id/imageKTP"
+                app:layout_constraintStart_toStartOf="@id/imageKTP"/>
+
             <Button
                 android:id="@+id/fotoKTP"
                 android:layout_width="match_parent"
@@ -777,7 +817,7 @@
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fotoKTPView" />
+                app:layout_constraintTop_toBottomOf="@+id/uploadPhotoKtp" />
 
 
             <TextView
@@ -790,6 +830,34 @@
                 android:textColor="@color/silver"
                 app:layout_constraintStart_toStartOf="@+id/fotoKTP"
                 app:layout_constraintTop_toBottomOf="@+id/fotoKTP" />
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/imageKK"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@id/fotoKKView"
+                app:layout_constraintEnd_toEndOf="@id/fotoKKView"
+                app:layout_constraintTop_toBottomOf="@id/fotoKKView"/>
+
+            <Button
+                android:id="@+id/uploadPhotoKk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:fontFamily="@font/volte"
+                android:textAllCaps="false"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/imageKK"
+                app:layout_constraintEnd_toEndOf="@id/imageKK"
+                app:layout_constraintStart_toStartOf="@id/imageKK"/>
 
             <Button
                 android:id="@+id/fotoKK"
@@ -809,7 +877,7 @@
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fotoKKView" />
+                app:layout_constraintTop_toBottomOf="@+id/uploadPhotoKk" />
 
 
             <TextView
@@ -822,6 +890,34 @@
                 android:textColor="@color/silver"
                 app:layout_constraintStart_toStartOf="@+id/fotoKK"
                 app:layout_constraintTop_toBottomOf="@+id/fotoKK" />
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/imageJaminan"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@id/fotoJaminanView"
+                app:layout_constraintEnd_toEndOf="@id/fotoJaminanView"
+                app:layout_constraintTop_toBottomOf="@id/fotoJaminanView"/>
+
+            <Button
+                android:id="@+id/uploadPhotoJaminan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upload"
+                android:background="@drawable/button"
+                android:textColor="@color/white"
+                android:fontFamily="@font/volte"
+                android:textAllCaps="false"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/imageJaminan"
+                app:layout_constraintEnd_toEndOf="@id/imageJaminan"
+                app:layout_constraintStart_toStartOf="@id/imageJaminan"/>
 
             <Button
                 android:id="@+id/fotoJaminan"
@@ -841,7 +937,7 @@
                 android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fotoJaminanView" />
+                app:layout_constraintTop_toBottomOf="@+id/uploadPhotoJaminan" />
 
 
             <Button
@@ -862,6 +958,60 @@
                 app:layout_constraintStart_toStartOf="@+id/fotoJaminan"
                 app:layout_constraintTop_toBottomOf="@+id/fotoJaminan" />
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempphotoprofile"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempphotokk"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempphotoktp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tempphotojaminan"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/frameProgressbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:translationZ="3dp"
+        android:visibility="invisible">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateDrawable="@drawable/custom_progress_bar" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

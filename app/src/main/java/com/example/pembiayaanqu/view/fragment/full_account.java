@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.pembiayaanqu.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,8 +35,15 @@ public class full_account extends Fragment {
     private TextView nama_perusahaan_saat_bekerja;
     private TextView jumlah_pengajuan_pembiayaan;
     private TextView tipe_tujuan_pembiayaan;
+    private TextView provinsi;
+    private TextView kota_kabupaten;
+    private TextView kecamatan;
+    private TextView kodePos;
+    private TextView alamatLengkap;
     private TextView lokasi_pengambilan;
     private TextView alamat_lokasi;
+    private ImageView imageKTP;
+    private ImageView imageKK;
     private Button toShorAccount;
 
 
@@ -43,7 +52,7 @@ public class full_account extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.account_full, container, false);
+        View view =  inflater.inflate(R.layout.fragment_account_full, container, false);
 
         toShorAccount = view.findViewById(R.id.layout_id_to_shortAccount);
         toShorAccount.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +62,8 @@ public class full_account extends Fragment {
             }
         });
 
+        imageKK = view.findViewById(R.id.imageKK);
+        imageKTP = view.findViewById(R.id.imageKTP);
         nomorHP = view.findViewById(R.id.nomorHP);
         email = view.findViewById(R.id.email);
         umur = view.findViewById(R.id.umur);
@@ -66,8 +77,10 @@ public class full_account extends Fragment {
         nama_perusahaan_saat_bekerja = view.findViewById(R.id.namaPerusahaanSaatBekerjaUsaha);
         jumlah_pengajuan_pembiayaan = view.findViewById(R.id.jumlahPengajuanPembiayaan);
         tipe_tujuan_pembiayaan = view.findViewById(R.id.tipeTujuanPembiayaan);
-        lokasi_pengambilan = view.findViewById(R.id.lokasiPengambilan);
-        alamat_lokasi = view.findViewById(R.id.alamatLokasi);
+        provinsi = view.findViewById(R.id.provinsi);
+        kota_kabupaten = view.findViewById(R.id.kota_kabupaten);
+        kecamatan = view.findViewById(R.id.kecamatan);
+        alamatLengkap = view.findViewById(R.id.alamatLengkap);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -93,8 +106,19 @@ public class full_account extends Fragment {
                                 nama_perusahaan_saat_bekerja.setText(documentSnapshot.getString("Nama Perusahaan saat Bekerja"));
                                 jumlah_pengajuan_pembiayaan.setText(documentSnapshot.getString("Jumlah Pengajuan Pembiayaan"));
                                 tipe_tujuan_pembiayaan.setText(documentSnapshot.getString("Tipe Tujuan Pembiayaan"));
-                                lokasi_pengambilan.setText(documentSnapshot.getString("Lokasi Pengambilan"));
-                                alamat_lokasi.setText(documentSnapshot.getString("Alamat Lokasi"));
+                                provinsi.setText(documentSnapshot.getString("Provinsi"));
+                                kota_kabupaten.setText(documentSnapshot.getString("KotaKabupaten"));
+                                kecamatan.setText(documentSnapshot.getString("Kecamatan"));
+//                                kodePos.setText(documentSnapshot.getString("Kode Pos"));
+                                alamatLengkap.setText(documentSnapshot.getString("Alamat Lengkap"));
+                                if (documentSnapshot.getString("uriPhotoKk") != null){
+                                    imageKK.setVisibility(View.VISIBLE);
+                                    Glide.with(getActivity()).load(documentSnapshot.getString("uriPhotoKk")).into(imageKK);
+                                }
+                                if (documentSnapshot.getString("uriPhotoKtp") != null){
+                                    imageKTP.setVisibility(View.VISIBLE);
+                                    Glide.with(getActivity()).load(documentSnapshot.getString("uriPhotoKtp")).into(imageKTP);
+                                }
                             }else {
                                 nomorHP.setText(user.getPhoneNumber());
                                 email.setText(user.getEmail());
@@ -109,85 +133,8 @@ public class full_account extends Fragment {
                     });
 
         }
-//        editProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onEditEdittext();
-//                editProfile.setVisibility(View.GONE);
-//                toShorAccount.setVisibility(View.GONE);
-//                savedata.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//
-//        savedata.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Map<String, Object> userFirestore = new HashMap<>();
-//                userFirestore.put("Nama Lengkap",namaLengkap.getText().toString());
-//                userFirestore.put("Nomor Handphone",nomorHP.getText().toString());
-//                userFirestore.put("Email",email.getText().toString());
-//                userFirestore.put("Umur",umur.getText().toString());
-////                userFirestore.put("Status",status.getText().toString());
-//                userFirestore.put("Jenis Kelamin",jenis_kelamin.getText().toString());
-//                userFirestore.put("Pendidikan Terakhir",pendidikan_terakhir.getText().toString());
-//                userFirestore.put("Pekerjaan atau Usaha",pekerjaan_usaha.getText().toString());
-//                userFirestore.put("Nomor NPWP",noNPWP.getText().toString());
-//                userFirestore.put("Nomor KTP",noKTP.getText().toString());
-//                userFirestore.put("Lama bekerja atau Usaha",lama_bekerja_usaha.getText().toString());
-//                userFirestore.put("Nama Perusahaan saat Bekerja",nama_perusahaan_saat_bekerja.getText().toString());
-//                userFirestore.put("Jumlah Pengajuan Pembiayaan",jumlah_pengajuan_pembiayaan.getText().toString());
-//                userFirestore.put("Tipe Tujuan Pembiayaan",tipe_tujuan_pembiayaan.getText().toString());
-//                userFirestore.put("Lokasi Pengambilan",lokasi_pengambilan.getText().toString());
-//                userFirestore.put("Alamat Lokasi",alamat_lokasi.getText().toString());
-//
-//                firebaseFirestore.collection("users").document(user.getUid()).set(userFirestore);
-//
-//                notEditableEdittext();
-//                editProfile.setVisibility(View.VISIBLE);
-//                toShorAccount.setVisibility(View.VISIBLE);
-//                savedata.setVisibility(View.GONE);
-//            }
-//        });
+
         return view;
     }
-
-//    private void onEditEdittext(){
-//        namaLengkap.setEnabled(true);
-//        nomorHP.setEnabled(true);
-//        email.setEnabled(true);
-//        umur.setEnabled(true);
-//        status.setEnabled(true);
-//        jenis_kelamin.setEnabled(true);
-//        pendidikan_terakhir.setEnabled(true);
-//        pekerjaan_usaha.setEnabled(true);
-//        noNPWP.setEnabled(true);
-//        noKTP.setEnabled(true);
-//        lama_bekerja_usaha.setEnabled(true);
-//        nama_perusahaan_saat_bekerja.setEnabled(true);
-//        jumlah_pengajuan_pembiayaan.setEnabled(true);
-//        tipe_tujuan_pembiayaan.setEnabled(true);
-//        lokasi_pengambilan.setEnabled(true);
-//        alamat_lokasi.setEnabled(true);
-//    }
-//
-//    private void notEditableEdittext(){
-//        namaLengkap.setEnabled(false);
-//        nomorHP.setEnabled(false);
-//        email.setEnabled(false);
-//        umur.setEnabled(false);
-//        status.setEnabled(false);
-//        jenis_kelamin.setEnabled(false);
-//        pendidikan_terakhir.setEnabled(false);
-//        pekerjaan_usaha.setEnabled(false);
-//        noNPWP.setEnabled(false);
-//        noKTP.setEnabled(false);
-//        lama_bekerja_usaha.setEnabled(false);
-//        nama_perusahaan_saat_bekerja.setEnabled(false);
-//        jumlah_pengajuan_pembiayaan.setEnabled(false);
-//        tipe_tujuan_pembiayaan.setEnabled(false);
-//        lokasi_pengambilan.setEnabled(false);
-//        alamat_lokasi.setEnabled(false);
-//    }
 
 }

@@ -1,42 +1,36 @@
 package com.example.pembiayaanqu.view.activity;
 
 import android.Manifest;
-import android.accounts.Account;
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.pembiayaanqu.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.example.pembiayaanqu.contract.dataLoad;
+import com.example.pembiayaanqu.presenter.loadDataPresenter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -49,7 +43,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class edit_profile extends AppCompatActivity {
+public class edit_profile extends AppCompatActivity implements dataLoad.view{
 
     private Button save_data;
     private Button addcoordinatemaps;
@@ -63,10 +57,10 @@ public class edit_profile extends AppCompatActivity {
     private ImageView imageJaminan;
     private TextView latitude;
     private TextView longitude;
-    private Uri getImgUriPhotoProfile;
-    private Uri getimgUriPhotoKTP;
-    private Uri getImgUriPhotoKK;
-    private Uri getImgUriPhotoJaminan;
+    private Uri PhotoProfile;
+    private Uri PhotoKTP;
+    private Uri PhotoKK;
+    private Uri PhotoJaminan;
     private EditText namaLengkap;
     private EditText nomorHP;
     private EditText umur;
@@ -81,23 +75,47 @@ public class edit_profile extends AppCompatActivity {
     private EditText nama_perusahaan_saat_bekerja;
     private EditText jumlah_pengajuan_pembiayaan;
     private EditText tipe_tujuan_pembiayaan;
-    private EditText provinsi;
-    private EditText kota_kabupaten;
+    private Spinner provinsi;
+    private Spinner kota_kabupaten;
     private EditText kecamatan;
     private EditText kodePos;
     private EditText alamatLengkap;
+    private Button uploadPhotoJaminan;
+    private Button uploadPhotoKk;
+    private Button uploadPhotoKtp;
+    private Button uploadPhotoProfile;
+    private TextView tempphotoprofile;
+    private TextView tempphotokk;
+    private TextView tempphotoktp;
+    private TextView tempphotojaminan;
+    private ImageView backactivitylay;
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
     private StorageReference storageReference;
 
     public static final String STORAGE_PATH = "user/";
-    private Uri pathData;
 
+    public String photoJaminanUri;
+    public String photoKkUri;
+    public String photoKtpUri;
+    public String photoProfileUri;
+    private RelativeLayout frameProgressbar;
+    private ProgressBar progressBar;
+    HashMap<Integer, String> spinerProvince;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_profile);
+
+        backactivitylay = findViewById(R.id.back);
+        backactivitylay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backActivity();
+            }
+        });
 
         save_data = findViewById(R.id.sumbitPengajuan);
         latitude = findViewById(R.id.latitude);
@@ -130,7 +148,34 @@ public class edit_profile extends AppCompatActivity {
         kecamatan = findViewById(R.id.kecamatan);
         kodePos = findViewById(R.id.kodePos);
         alamatLengkap = findViewById(R.id.alamatLengkap);
+        frameProgressbar = findViewById(R.id.frameProgressbar);
+        progressBar = findViewById(R.id.progress_bar);
+        uploadPhotoProfile = findViewById(R.id.uploadProfile);
+        uploadPhotoKtp = findViewById(R.id.uploadPhotoKtp);
+        uploadPhotoKk = findViewById(R.id.uploadPhotoKk);
+        uploadPhotoJaminan = findViewById(R.id.uploadPhotoJaminan);
+        tempphotojaminan = findViewById(R.id.tempphotojaminan);
+        tempphotokk = findViewById(R.id.tempphotokk);
+        tempphotoktp = findViewById(R.id.tempphotoktp);
+        tempphotoprofile = findViewById(R.id.tempphotoprofile);
 
+
+
+        final loadDataPresenter loadData = new loadDataPresenter(this);
+        loadData.readData();
+        loadData.readProvince();
+
+        provinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loadData.readKotaKab(spinerProvince.get(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         addcoordinatemaps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,40 +223,69 @@ public class edit_profile extends AppCompatActivity {
         takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Image"),122);
+                loadData.getImage(122);
             }
         });
 
         fotoKtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Image"),123);
+                loadData.getImage(123);
             }
         });
 
         fotoKk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Image"),124);
+                loadData.getImage(124);
             }
         });
 
         fotoJaminan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Image"),125);
+                loadData.getImage(125);
+            }
+        });
+
+        uploadPhotoProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String,Uri> imageData = new HashMap<>();
+                imageData.put("uriPhotoProfile",PhotoProfile);
+                loadData.uploadImage(imageData);
+                uploadPhotoProfile.setVisibility(View.GONE);
+            }
+        });
+
+        uploadPhotoKtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String,Uri> imageData = new HashMap<>();
+                imageData.put("uriPhotoKtp",PhotoKTP);
+                loadData.uploadImage(imageData);
+                uploadPhotoKtp.setVisibility(View.GONE);
+            }
+        });
+
+        uploadPhotoKk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String,Uri> imageData = new HashMap<>();
+                imageData.put("uriPhotoKk",PhotoKK);
+                loadData.uploadImage(imageData);
+                uploadPhotoKk.setVisibility(View.GONE);
+            }
+        });
+
+
+        uploadPhotoJaminan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String,Uri> imageData = new HashMap<>();
+                imageData.put("uriPhotoJaminan",PhotoJaminan);
+                loadData.uploadImage(imageData);
+                uploadPhotoJaminan.setVisibility(View.GONE);
             }
         });
 
@@ -220,184 +294,20 @@ public class edit_profile extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        final FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            firebaseFirestore.collection("users").document(user.getUid())
-                    .get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()){
-                                namaLengkap.setText(documentSnapshot.getString("Nama Lengkap"));
-                                nomorHP.setText(documentSnapshot.getString("Nomor Handphone"));
-                                email.setText(documentSnapshot.getString("Email"));
-                                umur.setText(documentSnapshot.getString("Umur"));
-                                status.setText(documentSnapshot.getString("Status"));
-                                jenis_kelamin.setText(documentSnapshot.getString("Jenis Kelamin"));
-                                pendidikan_terakhir.setText(documentSnapshot.getString("Pendidikan Terakhir"));
-                                pekerjaan_usaha.setText(documentSnapshot.getString("Pekerjaan atau Usaha"));
-                                noNPWP.setText(documentSnapshot.getString("Nomor NPWP"));
-                                noKTP.setText(documentSnapshot.getString("Nomor KTP"));
-                                lama_bekerja_usaha.setText(documentSnapshot.getString("Lama bekerja atau Usaha"));
-                                nama_perusahaan_saat_bekerja.setText(documentSnapshot.getString("Nama Perusahaan saat Bekerja"));
-                                jumlah_pengajuan_pembiayaan.setText(documentSnapshot.getString("Jumlah Pengajuan Pembiayaan"));
-                                tipe_tujuan_pembiayaan.setText(documentSnapshot.getString("Tipe Tujuan Pembiayaan"));
-                                latitude.setText(documentSnapshot.getString("Alamat Latitude"));
-                                longitude.setText(documentSnapshot.getString("Alamat Longitude"));
-                                provinsi.setText(documentSnapshot.getString("Provinsi"));
-                                kota_kabupaten.setText(documentSnapshot.getString("KotaKabupaten"));
-                                kecamatan.setText(documentSnapshot.getString("Kecamatan"));
-                                kodePos.setText(documentSnapshot.getString("Kode Pos"));
-                                alamatLengkap.setText(documentSnapshot.getString("Alamat Lengkap"));
-                            }else {
-                                namaLengkap.setText(user.getDisplayName());
-                                nomorHP.setText(user.getPhoneNumber());
-                                email.setText(user.getEmail());
-                            }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(edit_profile.this,"Failure",Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-        }
 
 
         save_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getImgUriPhotoProfile != null){
-                    final StorageReference ref = storageReference.child(STORAGE_PATH +System.currentTimeMillis()+"."+getImageExt(getImgUriPhotoProfile));
-                    ref.putFile(getImgUriPhotoProfile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(edit_profile.this,"Image Profile gagal di upload",Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                try {
+                    toUpdateData();
+                }catch (Exception e){
+                    Toast.makeText(edit_profile.this,e.toString(),Toast.LENGTH_SHORT).show();
                 }
-                Map<String, Object> userFirestore = new HashMap<>();
-                if (namaLengkap.getText().toString().isEmpty()){
-                    userFirestore.put("Nama Lengkap",null);
-                }else if (!(namaLengkap.getText().toString().isEmpty())){
-                    userFirestore.put("Nama Lengkap",namaLengkap.getText().toString());
-                }
-                if (nomorHP.getText().toString().isEmpty()){
-                    userFirestore.put("Nomor Handphone",null);
-                }else if (!(nomorHP.getText().toString().isEmpty())){
-                    userFirestore.put("Nomor Handphone",nomorHP.getText().toString());
-                }
-                if (email.getText().toString().isEmpty()){
-                    userFirestore.put("Email",null);
-                }else if (!(email.getText().toString().isEmpty())){
-                    userFirestore.put("Email",email.getText().toString());
-                }
-                if (umur.getText().toString().isEmpty()){
-                    userFirestore.put("Umur",null);
-                }else if (!(umur.getText().toString().isEmpty())){
-                    userFirestore.put("Umur",umur.getText().toString());
-                }
-                if (status.getText().toString().isEmpty()){
-                    userFirestore.put("Status",null);
-                }else if (!(status.getText().toString().isEmpty())){
-                    userFirestore.put("Status",status.getText().toString());
-                }
-                if (jenis_kelamin.getText().toString().isEmpty()){
-                    userFirestore.put("Jenis Kelamin",null);
-                }else if (!(jenis_kelamin.getText().toString().isEmpty())){
-                    userFirestore.put("Jenis Kelamin",jenis_kelamin.getText().toString());
-                }
-                if (pendidikan_terakhir.getText().toString().isEmpty()){
-                    userFirestore.put("Pendidikan Terakhir",null);
-                }else if (!(pendidikan_terakhir.getText().toString().isEmpty())){
-                    userFirestore.put("Pendidikan Terakhir",pendidikan_terakhir.getText().toString());
-                }
-                if (pekerjaan_usaha.getText().toString().isEmpty()){
-                    userFirestore.put("Pekerjaan atau Usaha",null);
-                }else if (!(pekerjaan_usaha.getText().toString().isEmpty())){
-                    userFirestore.put("Pekerjaan atau Usaha",pekerjaan_usaha.getText().toString());
-                }
-                if (noNPWP.getText().toString().isEmpty()){
-                    userFirestore.put("Nomor NPWP",null);
-                }else if (!(noNPWP.getText().toString().isEmpty())){
-                    userFirestore.put("Nomor NPWP",noNPWP.getText().toString());
-                }
-                if (noKTP.getText().toString().isEmpty()){
-                    userFirestore.put("Nomor KTP",null);
-                }else if (!(noKTP.getText().toString().isEmpty())){
-                    userFirestore.put("Nomor KTP",noKTP.getText().toString());
-                }
-                if (lama_bekerja_usaha.getText().toString().isEmpty()){
-                    userFirestore.put("Lama bekerja atau Usaha",null);
-                }else if (!(lama_bekerja_usaha.getText().toString().isEmpty())){
-                    userFirestore.put("Lama bekerja atau Usaha",lama_bekerja_usaha.getText().toString());
-                }
-                if (nama_perusahaan_saat_bekerja.getText().toString().isEmpty()){
-                    userFirestore.put("Nama Perusahaan saat Bekerja",null);
-                }else if (!(nama_perusahaan_saat_bekerja.getText().toString().isEmpty())){
-                    userFirestore.put("Nama Perusahaan saat Bekerja",nama_perusahaan_saat_bekerja.getText().toString());
-                }
-                if (jumlah_pengajuan_pembiayaan.getText().toString().isEmpty()){
-                    userFirestore.put("Jumlah Pengajuan Pembiayaan",null);
-                }else if (!(jumlah_pengajuan_pembiayaan.getText().toString().isEmpty())){
-                    userFirestore.put("Jumlah Pengajuan Pembiayaan",jumlah_pengajuan_pembiayaan.getText().toString());
-                }
-                if (tipe_tujuan_pembiayaan.getText().toString().isEmpty()){
-                    userFirestore.put("Tipe Tujuan Pembiayaan",null);
-                }else if (!(tipe_tujuan_pembiayaan.getText().toString().isEmpty())){
-                    userFirestore.put("Tipe Tujuan Pembiayaan",tipe_tujuan_pembiayaan.getText().toString());
-                }
-                if (latitude.getText().toString().isEmpty()){
-                    userFirestore.put("Alamat Latitude",null);
-                }else if (!(latitude.getText().toString().isEmpty())){
-                    userFirestore.put("Alamat Latitude",latitude.getText().toString());
-                }
-                if (longitude.getText().toString().isEmpty()){
-                    userFirestore.put("Alamat Longitude",null);
-                }else if (!(longitude.getText().toString().isEmpty())){
-                    userFirestore.put("Alamat Longitude",longitude.getText().toString());
-                }
-                if (provinsi.getText().toString().isEmpty()){
-                    userFirestore.put("Provinsi",null);
-                }else if (!(provinsi.getText().toString().isEmpty())){
-                    userFirestore.put("Provinsi",provinsi.getText().toString());
-                }
-                if (kota_kabupaten.getText().toString().isEmpty()){
-                    userFirestore.put("Kota / Kabupaten",null);
-                }else if (!(kota_kabupaten.getText().toString().isEmpty())){
-                    userFirestore.put("KotaKabupaten",kota_kabupaten.getText().toString());
-                }
-                if (kecamatan.getText().toString().isEmpty()){
-                    userFirestore.put("Kecamatan",null);
-                }else if (!(kecamatan.getText().toString().isEmpty())){
-                    userFirestore.put("Kecamatan",kecamatan.getText().toString());
-                }
-                if (kodePos.getText().toString().isEmpty()){
-                    userFirestore.put("Kode Pos",null);
-                }else if (!(kodePos.getText().toString().isEmpty())){
-                    userFirestore.put("Kode Pos",kodePos.getText().toString());
-                }
-                if (alamatLengkap.getText().toString().isEmpty()){
-                    userFirestore.put("Alamat Lengkap",null);
-                }else if (!(alamatLengkap.getText().toString().isEmpty())){
-                    userFirestore.put("Alamat Lengkap",alamatLengkap.getText().toString());
-                }
-//                userFirestore.put("uriPhotoKTP",pathData.toString());
-//                userFirestore.put("uriPhotoKTP",userDetail.getUrlphotoKTP());
-//                userFirestore.put("uriPhotoKK",userDetail.getUrlphotoKK());
-//                userFirestore.put("uriPhotoJaminan",userDetail.getUrlphotoJaminan());
-
-                firebaseFirestore.collection("users").document(user.getUid()).set(userFirestore);
-                onBackPressed();
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -411,10 +321,11 @@ public class edit_profile extends AppCompatActivity {
             }
         }
         else if (requestCode==122 && resultCode == RESULT_OK && data!=null && data.getData() != null){
-            getImgUriPhotoProfile= data.getData();
+            PhotoProfile= data.getData();
             try {
-                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),getImgUriPhotoProfile);
+                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),PhotoProfile);
                 imagePicture.setImageBitmap(bm);
+                uploadPhotoProfile.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -422,11 +333,12 @@ public class edit_profile extends AppCompatActivity {
             }
         }
         else if (requestCode==123 && resultCode == RESULT_OK && data!=null && data.getData() != null){
-            getimgUriPhotoKTP = data.getData();
+            PhotoKTP = data.getData();
             try {
-                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),getimgUriPhotoKTP);
+                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),PhotoKTP);
                 imageKtp.setVisibility(View.VISIBLE);
                 imageKtp.setImageBitmap(bm);
+                uploadPhotoKtp.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -434,11 +346,12 @@ public class edit_profile extends AppCompatActivity {
             }
         }
         else if (requestCode==124 && resultCode == RESULT_OK && data!=null && data.getData() != null){
-            getImgUriPhotoKK = data.getData();
+            PhotoKK = data.getData();
             try {
-                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),getImgUriPhotoKK);
+                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),PhotoKK);
                 imageKk.setVisibility(View.VISIBLE);
                 imageKk.setImageBitmap(bm);
+                uploadPhotoKk.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -446,11 +359,12 @@ public class edit_profile extends AppCompatActivity {
             }
         }
         else if (requestCode==125 && resultCode == RESULT_OK && data!=null && data.getData() != null){
-            getImgUriPhotoJaminan = data.getData();
+            PhotoJaminan = data.getData();
             try {
-                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),getImgUriPhotoJaminan);
+                Bitmap bm = MediaStore.Images.Media.getBitmap(getContentResolver(),PhotoJaminan);
                 imageJaminan.setVisibility(View.VISIBLE);
                 imageJaminan.setImageBitmap(bm);
+                uploadPhotoJaminan.setVisibility(View.VISIBLE);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -460,9 +374,311 @@ public class edit_profile extends AppCompatActivity {
 
     }
 
-    public String getImageExt (Uri uri){
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+
+
+    @Override
+    public void showProgressBar() {
+        frameProgressbar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        frameProgressbar.setClickable(true);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        frameProgressbar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+        frameProgressbar.setClickable(true);
+    }
+
+    @Override
+    public void changeActivity() {
+
+    }
+
+    @Override
+    public void displayData(HashMap<String, String> data) {
+        namaLengkap.setText(data.get("Nama Lengkap"));
+        nomorHP.setText(data.get("Nomor Handphone"));
+        email.setText(data.get("Email"));
+        umur.setText(data.get("Umur"));
+        status.setText(data.get("Status"));
+        jenis_kelamin.setText(data.get("Jenis Kelamin"));
+        pendidikan_terakhir.setText(data.get("Pendidikan Terakhir"));
+        pekerjaan_usaha.setText(data.get("Pekerjaan atau Usaha"));
+        noNPWP.setText(data.get("Nomor NPWP"));
+        noKTP.setText(data.get("Nomor KTP"));
+        lama_bekerja_usaha.setText(data.get("Lama bekerja atau Usaha"));
+        nama_perusahaan_saat_bekerja.setText(data.get("Nama Perusahaan saat Bekerja"));
+        jumlah_pengajuan_pembiayaan.setText(data.get("Jumlah Pengajuan Pembiayaan"));
+        tipe_tujuan_pembiayaan.setText(data.get("Tipe Tujuan Pembiayaan"));
+        latitude.setText(data.get("Alamat Latitude"));
+        longitude.setText(data.get("Alamat Longitude"));
+//        provinsi.setText(data.get("Provinsi"));
+//        kota_kabupaten.setText(data.get("KotaKabupaten"));
+        kecamatan.setText(data.get("Kecamatan"));
+        kodePos.setText(data.get("Kode Pos"));
+        alamatLengkap.setText(data.get("Alamat Lengkap"));
+        tempphotoprofile.setText(data.get("uriPhotoProfile"));
+        tempphotojaminan.setText(data.get("uriPhotoJaminan"));
+        tempphotoktp.setText(data.get("uriPhotoKtp"));
+        tempphotokk.setText(data.get("uriPhotoKk"));
+
+        if (data.get("uriPhotoProfile") !=null){
+            imagePicture.setVisibility(View.VISIBLE);
+            Glide.with(this).load(data.get("uriPhotoProfile")).fitCenter().into(imagePicture);
+        }
+        if (data.get("uriPhotoKk") != null){
+            imageKk.setVisibility(View.VISIBLE);
+            Glide.with(this).load(data.get("uriPhotoKk")).into(imageKk);
+        }
+        if (data.get("uriPhotoKtp") != null){
+            imageKtp.setVisibility(View.VISIBLE);
+            Glide.with(this).load(data.get("uriPhotoKtp")).into(imageKtp);
+        }
+        if (data.get("uriPhotoJaminan") != null){
+            imageJaminan.setVisibility(View.VISIBLE);
+            Glide.with(this).load(data.get("uriPhotoJaminan")).into(imageJaminan);
+        }
+    }
+
+    @Override
+    public void displayToastSuccess() {
+        Toast.makeText(edit_profile.this,"Edit Profile Success",Toast.LENGTH_SHORT).show();
+        backActivity();
+    }
+
+    @Override
+    public void displayToastFailure() {
+        Toast.makeText(edit_profile.this,"Failure",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayToastIsEmpty() {
+
+    }
+
+    @Override
+    public void backActivity() {
+        startActivity(new Intent(edit_profile.this,home.class));
+    }
+
+    @Override
+    public void resultActivity(int requestCode,Intent intent) {
+        startActivityForResult(Intent.createChooser(intent,"Select Image"),requestCode);
+    }
+
+    @Override
+    public void getdataUri(HashMap<String, String> data) {
+        for (Map.Entry me : data.entrySet()){
+            if (me.getKey().toString().equals("uriPhotoJaminan")){
+                photoJaminanUri = me.getValue().toString();
+            }
+            else if(me.getKey().toString().equals("uriPhotoKk")){
+                photoKkUri = me.getValue().toString();
+            }
+            else if (me.getKey().toString().equals("uriPhotoKtp")){
+                photoKtpUri = me.getValue().toString();
+            }
+            else if (me.getKey().toString().equals("uriPhotoProfile")){
+                photoProfileUri = me.getValue().toString();
+            }
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    @Override
+    public void toUpdateData() {
+        loadDataPresenter loadDataPresenter = new loadDataPresenter(this);
+        HashMap<String, String> userFirestore = new HashMap<>();
+        if (namaLengkap.getText().toString()== null){
+            userFirestore.put("Nama Lengkap", null);
+        }else if (!(namaLengkap.getText().toString().isEmpty())){
+            userFirestore.put("Nama Lengkap", namaLengkap.getText().toString().trim());
+        }
+        if (nomorHP.getText().toString()== null){
+            userFirestore.put("Nomor Handphone",null);
+        }else if (!(nomorHP.getText().toString().isEmpty())){
+            userFirestore.put("Nomor Handphone", nomorHP.getText().toString().trim());
+        }
+        if (email.getText().toString()== null){
+            userFirestore.put("Email",null);
+        }else if (!(email.getText().toString().isEmpty())){
+            userFirestore.put("Email", email.getText().toString().trim());
+        }
+        if (umur.getText().toString()== null){
+            userFirestore.put("Umur",null);
+        }else if (!(umur.getText().toString().isEmpty())){
+            userFirestore.put("Umur", umur.getText().toString().trim());
+        }
+        if (status.getText().toString()== null){
+            userFirestore.put("Status",null);
+        }else if (!(status.getText().toString().isEmpty())){
+            userFirestore.put("Status", status.getText().toString().trim());
+        }
+        if (jenis_kelamin.getText().toString()== null){
+            userFirestore.put("Jenis Kelamin",null);
+        }else if (!(jenis_kelamin.getText().toString().isEmpty())){
+            userFirestore.put("Jenis Kelamin", jenis_kelamin.getText().toString().trim());
+        }
+        if (pendidikan_terakhir.getText().toString()== null){
+            userFirestore.put("Pendidikan Terakhir",null);
+        }else if (!(pendidikan_terakhir.getText().toString().isEmpty())){
+            userFirestore.put("Pendidikan Terakhir", pendidikan_terakhir.getText().toString().trim());
+        }
+        if (pekerjaan_usaha.getText().toString()== null){
+            userFirestore.put("Pekerjaan atau Usaha",null);
+        }else if (!(pekerjaan_usaha.getText().toString().isEmpty())){
+            userFirestore.put("Pekerjaan atau Usaha", pekerjaan_usaha.getText().toString().trim());
+        }
+        if (noNPWP.getText().toString()== null){
+            userFirestore.put("Nomor NPWP",null);
+        }else if (!(noNPWP.getText().toString().isEmpty())){
+            userFirestore.put("Nomor NPWP", noNPWP.getText().toString().trim());
+        }
+        if (noKTP.getText().toString()== null){
+            userFirestore.put("Nomor KTP",null);
+        }else if (!(noKTP.getText().toString().isEmpty())){
+            userFirestore.put("Nomor KTP", noKTP.getText().toString().trim());
+        }
+        if (lama_bekerja_usaha.getText().toString()== null){
+            userFirestore.put("Lama bekerja atau Usaha",null);
+        }else if (!(lama_bekerja_usaha.getText().toString().isEmpty())){
+            userFirestore.put("Lama bekerja atau Usaha", lama_bekerja_usaha.getText().toString().trim());
+        }
+        if (nama_perusahaan_saat_bekerja.getText().toString()== null){
+            userFirestore.put("Nama Perusahaan saat Bekerja",null);
+        }else if (!(nama_perusahaan_saat_bekerja.getText().toString().isEmpty())){
+            userFirestore.put("Nama Perusahaan saat Bekerja", nama_perusahaan_saat_bekerja.getText().toString().trim());
+        }
+        if (jumlah_pengajuan_pembiayaan.getText().toString()== null){
+            userFirestore.put("Jumlah Pengajuan Pembiayaan",null);
+        }else if (!(jumlah_pengajuan_pembiayaan.getText().toString().isEmpty())){
+            userFirestore.put("Jumlah Pengajuan Pembiayaan", jumlah_pengajuan_pembiayaan.getText().toString().trim());
+        }
+        if (tipe_tujuan_pembiayaan.getText().toString()== null){
+            userFirestore.put("Tipe Tujuan Pembiayaan",null);
+        }else if (!(tipe_tujuan_pembiayaan.getText().toString().isEmpty())){
+            userFirestore.put("Tipe Tujuan Pembiayaan", tipe_tujuan_pembiayaan.getText().toString().trim());
+        }
+        if (latitude.getText().toString()== null){
+            userFirestore.put("Alamat Latitude",null);
+        }else if (!(latitude.getText().toString().isEmpty())){
+            userFirestore.put("Alamat Latitude", latitude.getText().toString().trim());
+        }
+        if (longitude.getText().toString()== null){
+            userFirestore.put("Alamat Longitude",null);
+        }else if (!(longitude.getText().toString().isEmpty())){
+            userFirestore.put("Alamat Longitude", longitude.getText().toString().trim());
+        }
+//        if (provinsi.getText().toString()== null){
+//            userFirestore.put("Provinsi",null);
+//        }else if (!(provinsi.getText().toString().isEmpty())){
+//            userFirestore.put("Provinsi", provinsi.getText().toString().trim());
+//        }
+//        if (kota_kabupaten.getText().toString()== null){
+//            userFirestore.put("KotaKabupaten",null);
+//        }else if (!(namaLengkap.getText().toString().isEmpty())){
+//            userFirestore.put("KotaKabupaten", kota_kabupaten.getText().toString().trim());
+//        }
+        if (kecamatan.getText().toString()== null){
+            userFirestore.put("Kecamatan",null);
+        }else if (!(kecamatan.getText().toString().isEmpty())){
+            userFirestore.put("Kecamatan", kecamatan.getText().toString().trim());
+        }
+        if (kodePos.getText().toString()== null){
+            userFirestore.put("Kode Pos",null);
+        }else if (!(kodePos.getText().toString().isEmpty())){
+            userFirestore.put("Kode Pos", kodePos.getText().toString().trim());
+        }
+        if (alamatLengkap.getText().toString()== null){
+            userFirestore.put("Alamat Lengkap",null);
+        }else if (!(alamatLengkap.getText().toString().isEmpty())){
+            userFirestore.put("Alamat Lengkap", alamatLengkap.getText().toString().trim());
+        }
+        if (photoProfileUri== null){
+            if (tempphotoprofile.getText().toString() == null){
+                userFirestore.put("uriPhotoProfile",null);
+            }else{
+                userFirestore.put("uriPhotoProfile",tempphotoprofile.getText().toString().trim());
+            }
+        }else if (photoProfileUri !=null){
+            userFirestore.put("uriPhotoProfile",photoProfileUri);
+        }
+        if (photoKtpUri== null){
+            if (tempphotoktp.getText().toString() == null){
+                userFirestore.put("uriPhotoKtp",null);
+            }else{
+                userFirestore.put("uriPhotoKtp",tempphotoktp.getText().toString().trim());
+            }
+        }else if (photoKtpUri !=null){
+            userFirestore.put("uriPhotoKtp",photoKtpUri);
+        }
+        if (photoKkUri== null){
+            if (tempphotokk.getText().toString() == null){
+                userFirestore.put("uriPhotoKk",null);
+            }else{
+                userFirestore.put("uriPhotoKk",tempphotokk.getText().toString().trim());
+            }
+        }else if (photoKkUri !=null){
+            userFirestore.put("uriPhotoKk",photoKkUri);
+        }
+        if (photoJaminanUri== null){
+            if (tempphotojaminan.getText().toString() == null){
+                userFirestore.put("uriPhotoJaminan",null);
+            }else{
+                userFirestore.put("uriPhotoJaminan",tempphotojaminan.getText().toString().trim());
+            }
+        }else if (photoJaminanUri !=null){
+            userFirestore.put("uriPhotoJaminan",photoJaminanUri);
+        }
+
+        loadDataPresenter.savedata(userFirestore);
+    }
+
+    @Override
+    public void displayToastUploadSuccess() {
+        Toast.makeText(edit_profile.this,"Upload Success",Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void spinnerData(String[] data, HashMap<Integer, String> value) {
+        ArrayAdapter<String> adapter =new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item, data);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provinsi.setAdapter(adapter);
+        spinerProvince = value;
+    }
+
+    @Override
+    public void spinnerDataKota(String[] data, HashMap<Integer, String> value) {
+        ArrayAdapter<String> adapter =new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item, data);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        kota_kabupaten.setAdapter(adapter);
+    }
+
+    @Override
+    public void spinerDataKategoriPengajuan(String[] data, HashMap<Integer, String> value) {
+
+    }
+
+    @Override
+    public void spinerDataDetailKategoriPengajuan(String[] data, HashMap<Integer, String> value) {
+
+    }
+
+    @Override
+    public void spinerDataCabangPengajuan(String[] data, HashMap<Integer, String> value) {
+
     }
 }

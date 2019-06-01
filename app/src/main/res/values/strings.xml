@@ -47,4 +47,37 @@
         <item>Belum Kawin</item>
     </string-array>
 
+
+    <string name="kategori_prompt"><font size="13">Pilih Kategori</font></string>
+    <string name="plafond_prompt"><font size="13">Pilih Plafond</font></string>
+    <string name="parameter_prompt"><font size="13">Pilih Parameter</font></string>
+    <string name="plafond"><font size="13">Plafond</font></string>
+    <string name="kategori_pengajuan">Kategori Pengajuan</string>
+
+    <string-array name="parameter_arrays">
+        <item><font size="13">Plafond</font></item>
+    </string-array>
+
+    <string-array name="kategori_arrays">
+        <item><font size="13">Semua</font></item>
+        <item><font size="13">Bank</font></item>
+        <item><font size="13">Multifinance</font></item>
+        <item><font size="13">Koperasi</font></item>
+        <item><font size="13">Program CSR</font></item>
+        <item><font size="13">Gadai</font></item>
+    </string-array>
+
+    <string-array name="plafond_arrays">
+        <item><font size="12">Rp.100.000.000</font></item>
+        <item><font size="12">Rp.200.000.000</font></item>
+        <item><font size="12">Rp.300.000.000</font></item>
+        <item><font size="12">Rp.400.000.000</font></item>
+        <item><font size="12">Rp.500.000.000</font></item>
+        <item><font size="12">Rp.600.000.000</font></item>
+        <item><font size="12">Rp.700.000.000</font></item>
+        <item><font size="12">Rp.800.000.000</font></item>
+        <item><font size="12">Rp.900.000.000</font></item>
+        <item><font size="12">Rp.1.000.000.000</font></item>
+    </string-array>
+
 </resources>

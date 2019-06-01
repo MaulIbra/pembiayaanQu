@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundmain">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<com.smarteist.autoimageslider.SliderLayout-->
+                <!--android:id="@+id/image_slider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="200dp"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"/>-->
+
+            <ImageView
+                android:id="@+id/image_slider"
+                android:src="@mipmap/two"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/image_slider" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="4dp"
+                app:cardCornerRadius="@dimen/default_gap"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view4"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:src="@drawable/pengajuan_pembiayaan"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/cardView"
+                app:layout_constraintTop_toTopOf="@+id/cardView" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-black"
+                android:text="PENGAJUAN PEMBIAYAAN"
+                android:textSize="11dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toTopOf="@+id/cardView"
+                app:layout_constraintVertical_bias="0.39" />
+
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif"
+                android:text="tersedia banyak pilihan"
+                android:textColor="@color/gold"
+                android:textSize="12dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/button_pengajuan"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button"
+                android:maxLines="2"
+                android:padding="5dp"
+                android:text="Mulai Pengajuan"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintEnd_toEndOf="@+id/cardView"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:translationZ="-2dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+            <ImageView
+                android:id="@+id/bank"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:src="@mipmap/bank"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toStartOf="@id/multifinance"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/bank"
+                app:layout_constraintEnd_toEndOf="@+id/bank"
+                app:layout_constraintStart_toStartOf="@+id/bank"
+                app:layout_constraintTop_toTopOf="@+id/bank"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <ImageView
+                android:id="@+id/multifinance"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:src="@drawable/multifinance"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/bank"
+                app:layout_constraintEnd_toStartOf="@id/koperasi"
+                app:layout_constraintStart_toEndOf="@+id/bank"
+                app:layout_constraintTop_toTopOf="@+id/bank" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Multifinance"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                app:layout_constraintEnd_toEndOf="@+id/multifinance"
+                app:layout_constraintStart_toStartOf="@+id/multifinance"
+                app:layout_constraintTop_toTopOf="@+id/textView3"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/koperasi"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:src="@mipmap/deal"
+                app:layout_constraintBottom_toBottomOf="@+id/multifinance"
+                app:layout_constraintEnd_toStartOf="@id/csr"
+                app:layout_constraintStart_toEndOf="@+id/multifinance"
+                app:layout_constraintTop_toTopOf="@+id/multifinance" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Koperasi"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="@+id/koperasi"
+                app:layout_constraintStart_toStartOf="@+id/koperasi"
+                app:layout_constraintTop_toTopOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <ImageView
+                android:id="@+id/csr"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:src="@mipmap/socialcare"
+                app:layout_constraintBottom_toBottomOf="@+id/koperasi"
+                app:layout_constraintEnd_toStartOf="@id/gadai"
+                app:layout_constraintHorizontal_bias="0.03"
+                app:layout_constraintStart_toEndOf="@+id/koperasi"
+                app:layout_constraintTop_toTopOf="@+id/koperasi" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Program\nCSR"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="@+id/csr"
+                app:layout_constraintStart_toStartOf="@+id/csr"
+                app:layout_constraintTop_toTopOf="@+id/textView6"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <ImageView
+                android:id="@+id/gadai"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:src="@mipmap/gadai"
+                app:layout_constraintBottom_toBottomOf="@+id/csr"
+                app:layout_constraintEnd_toEndOf="@id/view"
+                app:layout_constraintStart_toEndOf="@id/csr"
+                app:layout_constraintTop_toTopOf="@+id/csr" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Gadai"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="@+id/gadai"
+                app:layout_constraintStart_toStartOf="@+id/gadai"
+                app:layout_constraintTop_toTopOf="@+id/textView5"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:translationZ="-2dp"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <ImageView
+                android:id="@+id/history_pembiayaan"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="25dp"
+                android:src="@mipmap/history_pembiayaan"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toStartOf="@id/catatan_keuangan"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@+id/cardView2"
+                app:layout_constraintTop_toTopOf="@+id/cardView2" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Riwayat Pembiayaan"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/history_pembiayaan"
+                app:layout_constraintEnd_toEndOf="@+id/history_pembiayaan"
+                app:layout_constraintStart_toStartOf="@+id/history_pembiayaan"
+                app:layout_constraintTop_toTopOf="@+id/history_pembiayaan"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/catatan_keuangan"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="25dp"
+                android:src="@mipmap/catatan_keuangan"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toStartOf="@id/lokasi_terdekat"
+                app:layout_constraintStart_toEndOf="@id/history_pembiayaan"
+                app:layout_constraintTop_toTopOf="@id/history_pembiayaan" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Catatan Keuangan"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/catatan_keuangan"
+                app:layout_constraintEnd_toEndOf="@+id/catatan_keuangan"
+                app:layout_constraintStart_toStartOf="@+id/catatan_keuangan"
+                app:layout_constraintTop_toTopOf="@+id/catatan_keuangan"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageView
+                android:id="@+id/lokasi_terdekat"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="25dp"
+                android:src="@drawable/nearby_location"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toStartOf="@id/jemput_dokumen"
+                app:layout_constraintStart_toEndOf="@id/catatan_keuangan"
+                app:layout_constraintTop_toTopOf="@id/history_pembiayaan" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Lokasi\nTerdekat"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/lokasi_terdekat"
+                app:layout_constraintEnd_toEndOf="@+id/lokasi_terdekat"
+                app:layout_constraintStart_toStartOf="@+id/lokasi_terdekat"
+                app:layout_constraintTop_toTopOf="@+id/lokasi_terdekat"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <ImageView
+                android:id="@+id/jemput_dokumen"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="25dp"
+                android:src="@mipmap/jemput_doukumen"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/lokasi_terdekat"
+                app:layout_constraintTop_toTopOf="@id/lokasi_terdekat" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Jemput\nDokumen"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/jemput_dokumen"
+                app:layout_constraintEnd_toEndOf="@+id/jemput_dokumen"
+                app:layout_constraintStart_toStartOf="@+id/jemput_dokumen"
+                app:layout_constraintTop_toTopOf="@+id/jemput_dokumen"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <ImageView
+                android:id="@+id/mitra"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="25dp"
+                android:src="@drawable/mitra2"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toEndOf="@+id/history_pembiayaan"
+                app:layout_constraintTop_toBottomOf="@+id/history_pembiayaan" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Mitra"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/mitra"
+                app:layout_constraintEnd_toEndOf="@+id/mitra"
+                app:layout_constraintStart_toStartOf="@+id/mitra"
+                app:layout_constraintTop_toTopOf="@+id/mitra"
+                app:layout_constraintVertical_bias="0.87" />
+
+
+            <ImageView
+                android:id="@+id/lainnya"
+                android:layout_width="90dp"
+                android:layout_height="100dp"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingBottom="25dp"
+                android:src="@drawable/lain_lain"
+                android:translationZ="3dp"
+                app:layout_constraintEnd_toEndOf="@+id/catatan_keuangan"
+                app:layout_constraintTop_toBottomOf="@+id/catatan_keuangan" />
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="2"
+                android:text="Lainnya"
+                android:textColor="@color/textColor"
+                android:textSize="13dp"
+                android:translationZ="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/lainnya"
+                app:layout_constraintEnd_toEndOf="@+id/lainnya"
+                app:layout_constraintStart_toStartOf="@+id/lainnya"
+                app:layout_constraintTop_toTopOf="@+id/lainnya"
+                app:layout_constraintVertical_bias="0.87" />
+
+
+            <ImageView
+                android:id="@+id/one"
+                android:layout_width="214dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="3dp"
+                android:src="@mipmap/two"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/two"
+                app:layout_constraintTop_toBottomOf="@id/cardView2" />
+
+            <ImageView
+                android:id="@+id/two"
+                android:layout_width="214dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="3dp"
+                android:src="@mipmap/two"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/one"
+                app:layout_constraintTop_toBottomOf="@id/cardView2" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

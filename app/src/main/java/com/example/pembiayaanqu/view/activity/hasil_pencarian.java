@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.pembiayaanqu.R;
@@ -28,12 +31,17 @@ public class hasil_pencarian extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
     RecyclerView recyclerView;
     PencarianAdapter adapter;
+    private RelativeLayout frameProgressbar;
+    private ProgressBar progressBar;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hasil_pencarian);
+
+        frameProgressbar = findViewById(R.id.frameProgressbar);
+        progressBar = findViewById(R.id.progress_bar);
 
         Intent i = getIntent();
         String kategoriid = i.getStringExtra("kategori");
@@ -43,10 +51,9 @@ public class hasil_pencarian extends AppCompatActivity {
 
 
         String kategori = extractPosition(kategoriid);
-        Integer plafondMin = extractPostionplafound(plafondMinid);
-        Integer plafondMax = extractPostionplafound(plafondMaxid);
-//        Toast.makeText(hasil_pencarian.this,kategori,Toast.LENGTH_SHORT).show();
-        recyclerView = (RecyclerView) findViewById(R.id.recyclePencarian);
+        Integer plafondMin = Integer.parseInt(plafondMinid);
+        Integer plafondMax = Integer.parseInt(plafondMaxid);
+        recyclerView = findViewById(R.id.recyclePencarian);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         firebaseFirestore = FirebaseFirestore.getInstance();
@@ -60,7 +67,7 @@ public class hasil_pencarian extends AppCompatActivity {
         if (position.equals("0")){
             value = "semua";
         }else if(position.equals("1")){
-            value = "bank";
+            value = "layout_bank";
         }else if (position.equals("2")){
             value = "multifinance";
         }else if(position.equals("3")){
@@ -99,25 +106,103 @@ public class hasil_pencarian extends AppCompatActivity {
         return value;
     }
 
-    private void loadDataFromFirebase(String kategori,Integer plafondmin, Integer plafondmax){
-        firebaseFirestore.collection(kategori).document("JMDPzKIdgz8Wss8yCZKx").collection("Produk Pembiayaan").whereLessThanOrEqualTo("plafondMax",plafondmax).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (DocumentSnapshot querySnapshot : task.getResult()){
-                    pencarian p = new pencarian();
-                    p.setProdukPembiayaan(querySnapshot.getString("namaProduk"));
-                    p.setPlafondMin(String.valueOf((Long) querySnapshot.get("plafondMin")));
-                    p.setPlafondMax(String.valueOf((Long) querySnapshot.get("plafondMax")));
-                    list.add(p);
+    private void loadDataFromFirebase(final String kategori, final Integer plafondmin, final Integer plafondmax){
+
+        ArrayList<String> kategoritemp = new ArrayList<String>();
+
+        kategoritemp.add("layout_bank");
+        kategoritemp.add("multifinance");
+        kategoritemp.add("koperasi");
+        kategoritemp.add("programCSR");
+        kategoritemp.add("gadai");
+
+
+        if (kategori.equals("semua")){
+                for (int i = 0; i<kategoritemp.size();i++){
+                    firebaseFirestore.collection(kategoritemp.get(i)).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                            for (DocumentSnapshot querySnapshot : task.getResult()){
+                                if (querySnapshot.get("plafondMin") !=null && querySnapshot.get("plafondMax") != null){
+                                    if ((((long)querySnapshot.get("plafondMin") >= plafondmin) && ((long)querySnapshot.get("plafondMin")<= plafondmax)) || (((long)querySnapshot.get("plafondMax")>= plafondmin)&& ((long)querySnapshot.get("plafondMax")<= plafondmax)) ){
+                                        pencarian p = new pencarian();
+                                        p.setProdukPembiayaan(querySnapshot.getString("namaProduk"));
+                                        p.setPlafondMin(String.valueOf(querySnapshot.get("plafondMin")));
+                                        p.setPlafondMax(String.valueOf(querySnapshot.get("plafondMax")));
+                                        list.add(p);
+                                    }
+                                }
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(hasil_pencarian.this,"data kosong",Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-                adapter = new PencarianAdapter(hasil_pencarian.this,list);
-                recyclerView.setAdapter(adapter);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(hasil_pencarian.this,"data kosong",Toast.LENGTH_SHORT).show();
-            }
-        });
+            adapter = new PencarianAdapter(hasil_pencarian.this,list);
+            recyclerView.setAdapter(adapter);
+        }else{
+            showProgressbar();
+            firebaseFirestore.collection(kategori).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                    for (DocumentSnapshot querySnapshot : task.getResult()){
+                        if (querySnapshot.get("plafondMin") !=null && querySnapshot.get("plafondMax") != null){
+                            if (plafondmax == 0 && plafondmin !=0){
+                                if ((long) querySnapshot.get("plafondMin") >= plafondmin){
+                                    pencarian p = new pencarian();
+                                    p.setProdukPembiayaan(querySnapshot.getString("namaProduk"));
+                                    p.setPlafondMin(String.valueOf(querySnapshot.get("plafondMin")));
+                                    p.setPlafondMax(String.valueOf(querySnapshot.get("plafondMax")));
+                                    list.add(p);
+                                }
+                            }else if (plafondmax != 0 && plafondmin ==0){
+                                if ((long) querySnapshot.get("plafondMax") <= plafondmax){
+                                    pencarian p = new pencarian();
+                                    p.setProdukPembiayaan(querySnapshot.getString("namaProduk"));
+                                    p.setPlafondMin(String.valueOf(querySnapshot.get("plafondMin")));
+                                    p.setPlafondMax(String.valueOf(querySnapshot.get("plafondMax")));
+                                    list.add(p);
+                                }
+                            }
+                            else if (plafondmax != 0 && plafondmin != 0) {
+                                if ((((long) querySnapshot.get("plafondMin") >= plafondmin) && ((long) querySnapshot.get("plafondMin") <= plafondmax)) || (((long) querySnapshot.get("plafondMax") >= plafondmin) && ((long) querySnapshot.get("plafondMax") <= plafondmax))) {
+                                    pencarian p = new pencarian();
+                                    p.setProdukPembiayaan(querySnapshot.getString("namaProduk"));
+                                    p.setPlafondMin(String.valueOf(querySnapshot.get("plafondMin")));
+                                    p.setPlafondMax(String.valueOf(querySnapshot.get("plafondMax")));
+                                    list.add(p);
+                                }
+                            }
+                        }
+                    }
+                    hideProgressbar();
+                    adapter = new PencarianAdapter(hasil_pencarian.this,list);
+                    recyclerView.setAdapter(adapter);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+           //         hideProgressbar();
+                    Toast.makeText(hasil_pencarian.this,"data kosong",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    public void showProgressbar(){
+        frameProgressbar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+        frameProgressbar.setClickable(true);
+    }
+
+    public void hideProgressbar(){
+        frameProgressbar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+        frameProgressbar.setClickable(true);
     }
 }

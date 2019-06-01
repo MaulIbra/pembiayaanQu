@@ -17,10 +17,17 @@ public class user {
     public String nama_perusahaan_saat_bekerja_usaha;
     public String jumlah_pengajuan_pembiayaan;
     public String tipe_tujuan_pembiayaan;
-    public String lokasi_pengambilan;
-    public String alamat_lokasi;
+    public String alamatLatitude;
+    public String alamatLongitude;
+    public String provinsi;
+    public String kota_kabupaten;
+    public String kecamatan;
+    public String kodePos;
+    public String alamatLengkap;
     public String urlphotoKTP;
     public String urlphotoKK;
+    public String urlphotoProfile;
+    public String urlphotoJaminan;
 
 
     public user(String username, String phoneNumber, String email, String password) {
@@ -30,7 +37,7 @@ public class user {
         this.password = password;
     }
 
-    public user(String username, String phoneNumber, String email, String password, String nama_lengkap, String umur, String status, String jenis_kelamin, String pendidikan_terakhir, String pekerjaan_usaha, String nomor_npwp, String nomor_ktp, String lama_bekerja_usaha, String nama_perusahaan_saat_bekerja_usaha, String jumlah_pengajuan_pembiayaan, String tipe_tujuan_pembiayaan, String lokasi_pengambilan, String alamat_lokasi, String urlphotoKTP, String urlphotoKK) {
+    public user(String username, String phoneNumber, String email, String password, String nama_lengkap, String umur, String status, String jenis_kelamin, String pendidikan_terakhir, String pekerjaan_usaha, String nomor_npwp, String nomor_ktp, String lama_bekerja_usaha, String nama_perusahaan_saat_bekerja_usaha, String jumlah_pengajuan_pembiayaan, String tipe_tujuan_pembiayaan, String alamatLatitude, String alamatLongitude, String provinsi, String kota_kabupaten, String kecamatan, String kodePos, String alamatLengkap, String urlphotoKTP, String urlphotoKK, String urlphotoProfile, String urlphotoJaminan) {
         this.username = username;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -47,11 +54,19 @@ public class user {
         this.nama_perusahaan_saat_bekerja_usaha = nama_perusahaan_saat_bekerja_usaha;
         this.jumlah_pengajuan_pembiayaan = jumlah_pengajuan_pembiayaan;
         this.tipe_tujuan_pembiayaan = tipe_tujuan_pembiayaan;
-        this.lokasi_pengambilan = lokasi_pengambilan;
-        this.alamat_lokasi = alamat_lokasi;
+        this.alamatLatitude = alamatLatitude;
+        this.alamatLongitude = alamatLongitude;
+        this.provinsi = provinsi;
+        this.kota_kabupaten = kota_kabupaten;
+        this.kecamatan = kecamatan;
+        this.kodePos = kodePos;
+        this.alamatLengkap = alamatLengkap;
         this.urlphotoKTP = urlphotoKTP;
         this.urlphotoKK = urlphotoKK;
+        this.urlphotoProfile = urlphotoProfile;
+        this.urlphotoJaminan = urlphotoJaminan;
     }
+
 
     public String getUsername() {
         return username;
@@ -181,20 +196,60 @@ public class user {
         this.tipe_tujuan_pembiayaan = tipe_tujuan_pembiayaan;
     }
 
-    public String getLokasi_pengambilan() {
-        return lokasi_pengambilan;
+    public String getAlamatLatitude() {
+        return alamatLatitude;
     }
 
-    public void setLokasi_pengambilan(String lokasi_pengambilan) {
-        this.lokasi_pengambilan = lokasi_pengambilan;
+    public void setAlamatLatitude(String alamatLatitude) {
+        this.alamatLatitude = alamatLatitude;
     }
 
-    public String getAlamat_lokasi() {
-        return alamat_lokasi;
+    public String getAlamatLongitude() {
+        return alamatLongitude;
     }
 
-    public void setAlamat_lokasi(String alamat_lokasi) {
-        this.alamat_lokasi = alamat_lokasi;
+    public void setAlamatLongitude(String alamatLongitude) {
+        this.alamatLongitude = alamatLongitude;
+    }
+
+    public String getProvinsi() {
+        return provinsi;
+    }
+
+    public void setProvinsi(String provinsi) {
+        this.provinsi = provinsi;
+    }
+
+    public String getKota_kabupaten() {
+        return kota_kabupaten;
+    }
+
+    public void setKota_kabupaten(String kota_kabupaten) {
+        this.kota_kabupaten = kota_kabupaten;
+    }
+
+    public String getKecamatan() {
+        return kecamatan;
+    }
+
+    public void setKecamatan(String kecamatan) {
+        this.kecamatan = kecamatan;
+    }
+
+    public String getKodePos() {
+        return kodePos;
+    }
+
+    public void setKodePos(String kodePos) {
+        this.kodePos = kodePos;
+    }
+
+    public String getAlamatLengkap() {
+        return alamatLengkap;
+    }
+
+    public void setAlamatLengkap(String alamatLengkap) {
+        this.alamatLengkap = alamatLengkap;
     }
 
     public String getUrlphotoKTP() {
@@ -211,5 +266,21 @@ public class user {
 
     public void setUrlphotoKK(String urlphotoKK) {
         this.urlphotoKK = urlphotoKK;
+    }
+
+    public String getUrlphotoProfile() {
+        return urlphotoProfile;
+    }
+
+    public void setUrlphotoProfile(String urlphotoProfile) {
+        this.urlphotoProfile = urlphotoProfile;
+    }
+
+    public String getUrlphotoJaminan() {
+        return urlphotoJaminan;
+    }
+
+    public void setUrlphotoJaminan(String urlphotoJaminan) {
+        this.urlphotoJaminan = urlphotoJaminan;
     }
 }

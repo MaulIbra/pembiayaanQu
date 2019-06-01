@@ -1,0 +1,48 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardMenu"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:padding="5dp"
+        android:id="@+id/logo_bank"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/custom_border"
+        android:src="@drawable/logo_bank_mandiri_syariah"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/labelBank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="Label Bank"
+        android:textColor="@color/colorText"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/logo_bank"
+        app:layout_constraintStart_toStartOf="@+id/logo_bank"
+        app:layout_constraintTop_toBottomOf="@+id/logo_bank" />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+
+
+

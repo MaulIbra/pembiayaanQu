@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/pengajuan_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/backArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/pengajuan_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/pengajuan_toolbar"
+        app:layout_constraintTop_toTopOf="@+id/pengajuan_toolbar" />
+
+    <TextView
+        android:id="@+id/nama_perusahaan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Riwayat Pembiayaan"
+        android:fontFamily="@font/volte"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/backArrow"
+        app:layout_constraintStart_toEndOf="@+id/backArrow"
+        app:layout_constraintTop_toTopOf="@+id/backArrow" />
+
+
+    <android.support.design.widget.TabLayout
+        app:layout_constraintTop_toBottomOf="@id/pengajuan_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:id="@+id/tablayout_id"
+        app:tabTextColor="@color/colorText"
+        app:tabIndicatorColor="@color/colorPrimary"
+        android:background="@color/backgroundmain"
+        />
+
+    <android.support.v4.view.ViewPager
+        app:layout_constraintTop_toBottomOf="@id/tablayout_id"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/viewpager_id"/>
+
+
+
+
+</android.support.constraint.ConstraintLayout>
